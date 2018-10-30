@@ -19,6 +19,7 @@
   "homepage": "https://github.com/wadecoufal/Sequence#readme",
   "dependencies": {
     "@babel/core": "^7.1.2",
+    "@babel/helper-remap-async-to-generator": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",

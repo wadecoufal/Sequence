@@ -6,12 +6,11 @@ const NOTES = {
 
 
 class Sequencer {
-  constructor(ctx) {
-    // color
-    //
+  constructor(ctx, audioCtx) {
     this.squares = [];
     this.addSquares();
     this.ctx = ctx;
+    this.audioCtx = audioCtx;
   }
 
   addSquares() {
@@ -54,6 +53,7 @@ class Sequencer {
     const yIdx = Math.floor(y / 50) * 10;
     return xIdx + yIdx;
   }
+
 }
 
 export default Sequencer;

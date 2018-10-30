@@ -108,14 +108,13 @@ var NOTES = {};
 var Sequencer =
 /*#__PURE__*/
 function () {
-  function Sequencer(ctx) {
+  function Sequencer(ctx, audioCtx) {
     _classCallCheck(this, Sequencer);
 
-    // color
-    //
     this.squares = [];
     this.addSquares();
     this.ctx = ctx;
+    this.audioCtx = audioCtx;
   }
 
   _createClass(Sequencer, [{
@@ -215,8 +214,7 @@ function () {
   _createClass(Square, [{
     key: "soundNote",
     value: function soundNote() {
-      if (this.toggled) {// play note value
-      } else {}
+      if (this.toggled) {} else {}
     }
   }, {
     key: "toggleColor",
@@ -257,14 +255,35 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener("DOMContentLoaded", function () {
   var canvas = document.getElementById("canvas");
+  var audio = document.getElementById("audio");
   canvas.width = 500;
   canvas.height = 500;
+  var AudioContext = window.AudioContext || window.webkitAudioContext;
+  var audioCtx = new AudioContext();
+  var track = audioCtx.createMediaElementSource(audio);
+  track.connect(audioCtx.destination);
   var ctx = canvas.getContext("2d");
-  var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
+  var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, audioCtx);
   sequencer.draw(ctx);
   canvas.addEventListener('click', function (e) {
     return sequencer.toggleSquareAtPos(canvas, event);
   });
+  canvas.addEventListener('click', function () {
+    audio.play(); // check if context is in suspended state (autoplay policy)
+
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    } // play or pause track depending on state
+
+
+    if (this.dataset.playing === 'false') {
+      audio.play();
+      this.dataset.playing = 'true';
+    } else if (this.dataset.playing === 'true') {
+      audio.pause();
+      this.dataset.playing = 'false';
+    }
+  }, false);
 });
 
 /***/ })

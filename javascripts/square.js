@@ -12,7 +12,7 @@ class Square {
 
   soundNote() {
     if (this.toggled) {
-      // play note value
+      
     } else {
 
     }
