@@ -7,6 +7,7 @@ class Square {
     // width/height
     this.x = x;
     this.y = y;
+    this.color = 'gray';
   }
 
   soundNote() {
@@ -17,9 +18,17 @@ class Square {
     }
   }
 
+  toggleColor() {
+    if (this.color === 'gray') {
+      this.color = 'red';
+    } else {
+      this.color = 'gray';
+    }
+  }
+
   draw(ctx) {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, 10, 10)
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x, this.y, 45, 45)
     // ctx.beginPath();
     // ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
     // ctx.fill();
