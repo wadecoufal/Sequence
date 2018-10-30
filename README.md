@@ -16,7 +16,7 @@ The sequencer is a grid of squares, each of which represent a note. The sequence
 ## BONUS:
 - Use up to three sequencers, each of which can be customized to play a different instrument.
 
-![alt-text](https://github.com/wadecoufal/Cadenze/blob/master/DemoImage.png)
+![alt-text](https://github.com/wadecoufal/Sequence/blob/master/Sequence%20Wirefram.png)
 
 ## Technologies
 
@@ -28,20 +28,21 @@ The sequencer is a grid of squares, each of which represent a note. The sequence
 ## Timeline
 
 #### Day 1:
-[ ] Sketch out the sequence table
-[ ] Make the squares toggleable (change color when toggled on/off)
-[ ] Start researching Web Audio API for including sounds
+[-] Sketch out the sequence table
+[-] Make the squares toggleable (change color when toggled on/off)
+[-] Start researching Web Audio API for including sounds
 #### Day 2:
-[ ] Get squares to create sound
-[ ] Start getting the sequencer to pass from left to right, triggering squares
+[-] Get squares to create sound
+[-] Start getting the sequencer to pass from left to right, triggering squares
 #### Day 3:
-[ ] Add functionality to change BPM
-[ ] Add functionality to change instrument
+[-] Add functionality to change BPM
+[-] Add functionality to change instrument
 #### Day 4:
-[ ] Add functionality to change key
-[ ] Add functionality to change color scheme
+[-] Add functionality to change key
+[-] Add functionality to change color scheme
 #### Day 5:
-[ ] 
+[-] Add preset tracks for users to try out
 #### Weekend:
-[ ] Polish the functionality of the sequencer
-[ ] Work on styling
+[-] Polish the functionality of the sequencer
+[-] Work on styling
+
