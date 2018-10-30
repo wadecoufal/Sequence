@@ -16,6 +16,8 @@ The sequencer is a grid of squares, each of which represent a note. The sequence
 ## BONUS:
 - Use up to three sequencers, each of which can be customized to play a different instrument.
 
+![alt-text](https://github.com/wadecoufal/Cadenze/blob/master/DemoImage.png)
+
 ## Technologies
 
 - Vanilla Javascript for basic logic
@@ -39,7 +41,7 @@ The sequencer is a grid of squares, each of which represent a note. The sequence
 [ ] Add functionality to change key
 [ ] Add functionality to change color scheme
 #### Day 5:
-[ ]
+[ ] 
 #### Weekend:
 [ ] Polish the functionality of the sequencer
 [ ] Work on styling
