@@ -102,19 +102,15 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+ // const COLORS = [
+//   "#ff70b2",
+//   "#ff6394",
+//   "#ff4f75",
+//   "#ff3a4b",
+//   "#ff2134",
+//   "#e5091c"
+// ];
 
-var NOTES = {
-  0: "./assets/sound_files/glock_d1.wav",
-  1: "./assets/sound_files/glock_e1.wav",
-  2: "./assets/sound_files/glock_f1.wav",
-  3: "./assets/sound_files/glock_g1.wav",
-  4: "./assets/sound_files/glock_a2.wav",
-  5: "./assets/sound_files/glock_b2.wav",
-  6: './assets/sound_files/glock_c2.wav',
-  7: './assets/sound_files/glock_cs2.wav',
-  8: './assets/sound_files/glock_d2.wav',
-  9: './assets/sound_files/glock_e2.wav'
-};
 var MARIMBA = {
   6: "./assets/sound_files/marimba/mar_b3.wav",
   9: "./assets/sound_files/marimba/mar_c3.wav",
@@ -126,25 +122,47 @@ var MARIMBA = {
   0: "./assets/sound_files/marimba/mar_b5.wav",
   2: "./assets/sound_files/marimba/mar_c5.wav",
   1: "./assets/sound_files/marimba/mar_e5.wav"
-}; // const COLORS = [
-//   "#ff70b2",
-//   "#ff6394",
-//   "#ff4f75",
-//   "#ff3a4b",
-//   "#ff2134",
-//   "#e5091c"
-// ];
+};
+var COLOR_SCHEMES = {
+  'colorful': {
+    'red': {
+      value: 150,
+      dir: 'desc'
+    },
+    'green': {
+      value: 25,
+      dir: 'asc'
+    },
+    'blue': {
+      value: 50,
+      dir: 'desc'
+    }
+  },
+  'muted': {
+    'red': {
+      value: 0,
+      dir: 'desc'
+    },
+    'green': {
+      value: 0,
+      dir: 'asc'
+    },
+    'blue': {
+      value: 0,
+      dir: 'desc'
+    }
+  }
+};
 
 var Sequencer =
 /*#__PURE__*/
 function () {
-  function Sequencer(ctx, audioCtx) {
+  function Sequencer(ctx) {
     _classCallCheck(this, Sequencer);
 
     this.squares = [];
     this.addSquares();
     this.ctx = ctx;
-    this.audioCtx = audioCtx;
     this.currentColumn = 0;
     this.currentColorIdx = 0;
     this.red = {
@@ -233,6 +251,8 @@ function () {
       var row = 0;
 
       for (var i = 0; i < 10; i++) {
+        // create audio here and apply to all j squares
+        // const audio = this.createAudioTag(MARIMBA[row]);
         for (var j = 0; j < 10; j++) {
           var newSquareIndex = this.squares.length;
           this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, MARIMBA[row], newSquareIndex));
@@ -243,6 +263,15 @@ function () {
         y += 50;
         row += 1;
       }
+    }
+  }, {
+    key: "createAudioTag",
+    value: function createAudioTag(audioFilePath) {
+      var audio = document.createElement('audio');
+      audio.setAttribute('src', audioFilePath);
+      audio.setAttribute('type', 'audio/wav');
+      document.body.appendChild(audio);
+      return audio;
     }
   }, {
     key: "draw",
@@ -315,7 +344,9 @@ function () {
     this.color = 'black';
     this.newColor = 'black';
     this.toggled = false;
-    this.index = index;
+    this.index = index; // this.audio = filepath;
+    // set audio in sequencer (10 instead of 100)
+
     this.audio = document.createElement('audio');
     this.audio.setAttribute('src', filepath);
     this.audio.setAttribute('id', index);
@@ -368,6 +399,90 @@ function () {
 
 /***/ }),
 
+/***/ "./javascripts/util.js":
+/*!*****************************!*\
+  !*** ./javascripts/util.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var INSTRUMENTS = {
+  'Marimba': {
+    6: "./assets/sound_files/marimba/mar_b3.wav",
+    9: "./assets/sound_files/marimba/mar_c3.wav",
+    8: "./assets/sound_files/marimba/mar_e3.wav",
+    7: "./assets/sound_files/marimba/mar_g3.wav",
+    3: "./assets/sound_files/marimba/mar_a4.wav",
+    5: "./assets/sound_files/marimba/mar_d4.wav",
+    4: "./assets/sound_files/marimba/mar_f4.wav",
+    0: "./assets/sound_files/marimba/mar_b5.wav",
+    2: "./assets/sound_files/marimba/mar_c5.wav",
+    1: "./assets/sound_files/marimba/mar_e5.wav"
+  },
+  'Glockenspiel': {
+    0: "./assets/sound_files/glock_d1.wav",
+    1: "./assets/sound_files/glock_e1.wav",
+    2: "./assets/sound_files/glock_f1.wav",
+    3: "./assets/sound_files/glock_g1.wav",
+    4: "./assets/sound_files/glock_a2.wav",
+    5: "./assets/sound_files/glock_b2.wav",
+    6: './assets/sound_files/glock_c2.wav',
+    7: './assets/sound_files/glock_cs2.wav',
+    8: './assets/sound_files/glock_d2.wav',
+    9: './assets/sound_files/glock_e2.wav'
+  }
+};
+
+var Util =
+/*#__PURE__*/
+function () {
+  function Util() {
+    _classCallCheck(this, Util);
+  }
+
+  _createClass(Util, [{
+    key: "changeInstrument",
+    value: function changeInstrument(event) {
+      var allAudioTags = document.getElementsByTagName('audio');
+      var instrumentName = event.target.textContent;
+      var instrumentFilePaths = INSTRUMENTS[instrumentName];
+      var row = -1;
+      var volume;
+
+      if (instrumentName === 'Marimba') {
+        volume = 1.0;
+      } else {
+        volume = 0.1;
+      }
+
+      for (var idx = 0; idx < allAudioTags.length; idx++) {
+        if (idx % 10 === 0) {
+          row += 1;
+        }
+
+        allAudioTags[idx].setAttribute("src", instrumentFilePaths[row]);
+        console.log('volume', volume);
+        allAudioTags[idx].volume = volume;
+        console.log('audioTag', allAudioTags[idx]);
+      }
+    }
+  }]);
+
+  return Util;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Util);
+
+/***/ }),
+
 /***/ "./sequence.js":
 /*!*********************!*\
   !*** ./sequence.js ***!
@@ -378,18 +493,25 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./javascripts/sequencer.js */ "./javascripts/sequencer.js");
+/* harmony import */ var _javascripts_util_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./javascripts/util.js */ "./javascripts/util.js");
+
 
 document.addEventListener("DOMContentLoaded", function () {
+  console.log('111');
   var canvas = document.getElementById("canvas");
+  var keys = document.getElementById('keys');
+  var instruments = document.getElementById('instruments');
   canvas.width = 500;
   canvas.height = 500;
-  var AudioContext = window.AudioContext || window.webkitAudioContext;
-  var audioCtx = new AudioContext();
   var ctx = canvas.getContext("2d");
-  var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, audioCtx);
+  var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
+  var util = new _javascripts_util_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
   sequencer.draw(ctx);
-  canvas.addEventListener('click', function (e) {
+  canvas.addEventListener('click', function (event) {
     return sequencer.toggleSquareAtPos(canvas, event);
+  });
+  instruments.addEventListener('click', function (event) {
+    return util.changeInstrument(event);
   });
 });
 

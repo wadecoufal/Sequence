@@ -7,6 +7,9 @@ body {
   background-color: black;
   display: flex;
   justify-content: space-around;
+
+  font-family: sans-serif;
+  color: white;
 }
 
 .sequence-header {
@@ -17,22 +20,6 @@ body {
   text-align: center;
 }
 
-.key-dropdown {
-  background-color: pink;
-  width: 250px;
-  height: 300px;
-}
-
-.instrument-dropdown {
-  background-color: pink;
-  width: 250px;
-  height: 300px;
-}
-
-.hidden {
-  display: none;
-}
-
 .bpm-btm {
   width: 100px;
   height: 100px;
@@ -40,12 +27,26 @@ body {
   border-radius: 50%;
 }
 
-.key {
+.colors {
+  width: 300px;
+  height: 100px;
+  background-color: red;
+}
+
+.key-list-item {
 
 }
 
-.instrument {
+.instruments {
+  width: 300px;
+  height: 100px;
+  background-color: red;
+}
 
+.instrument-list-item {
+  width: 100%;
+  margin: 3px;
+  background-color: purple;
 }
 
 #canvas {

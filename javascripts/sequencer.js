@@ -1,17 +1,13 @@
-import Square from './square.js'
+import Square from './square.js';
 
-const NOTES = {
-  0: "./assets/sound_files/glock_d1.wav",
-  1: "./assets/sound_files/glock_e1.wav",
-  2: "./assets/sound_files/glock_f1.wav",
-  3: "./assets/sound_files/glock_g1.wav",
-  4: "./assets/sound_files/glock_a2.wav",
-  5: "./assets/sound_files/glock_b2.wav",
-  6: './assets/sound_files/glock_c2.wav',
-  7: './assets/sound_files/glock_cs2.wav',
-  8: './assets/sound_files/glock_d2.wav',
-  9: './assets/sound_files/glock_e2.wav',
-};
+// const COLORS = [
+//   "#ff70b2",
+//   "#ff6394",
+//   "#ff4f75",
+//   "#ff3a4b",
+//   "#ff2134",
+//   "#e5091c"
+// ];
 
 const MARIMBA = {
   6: "./assets/sound_files/marimba/mar_b3.wav",
@@ -24,25 +20,26 @@ const MARIMBA = {
   0: "./assets/sound_files/marimba/mar_b5.wav",
   2: "./assets/sound_files/marimba/mar_c5.wav",
   1: "./assets/sound_files/marimba/mar_e5.wav"
-};
+}
 
-// const COLORS = [
-//   "#ff70b2",
-//   "#ff6394",
-//   "#ff4f75",
-//   "#ff3a4b",
-//   "#ff2134",
-//   "#e5091c"
-// ];
-
-
+const COLOR_SCHEMES = {
+  'colorful': {
+    'red': {value: 150, dir: 'desc'},
+    'green': {value: 25, dir: 'asc'},
+    'blue': {value: 50, dir: 'desc'}
+  },
+  'muted': {
+    'red': { value: 0, dir: 'desc' },
+    'green': { value: 0, dir: 'asc' },
+    'blue': { value: 0, dir: 'desc' }
+  }
+}
 
 class Sequencer {
-  constructor(ctx, audioCtx) {
+  constructor(ctx) {
     this.squares = [];
     this.addSquares();
     this.ctx = ctx;
-    this.audioCtx = audioCtx;
     this.currentColumn = 0;
     this.currentColorIdx = 0;
 
@@ -107,6 +104,9 @@ class Sequencer {
     let y = 0;
     let row = 0;
     for (let i = 0; i < 10; i++) {
+      // create audio here and apply to all j squares
+      // const audio = this.createAudioTag(MARIMBA[row]);
+
       for (let j = 0; j < 10; j++) {
         let newSquareIndex = this.squares.length;
         this.squares.push(new Square(x, y, MARIMBA[row], newSquareIndex));
@@ -116,6 +116,14 @@ class Sequencer {
       y += 50;
       row += 1
     }
+  }
+
+  createAudioTag(audioFilePath) {
+    const audio = document.createElement('audio');
+    audio.setAttribute('src', audioFilePath);
+    audio.setAttribute('type', 'audio/wav');
+    document.body.appendChild(audio);
+    return audio;
   }
 
   draw(ctx) {

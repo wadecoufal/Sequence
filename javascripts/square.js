@@ -7,6 +7,9 @@ class Square {
     this.toggled = false;
     this.index = index
 
+    // this.audio = filepath;
+
+    // set audio in sequencer (10 instead of 100)
     this.audio = document.createElement('audio');
     this.audio.setAttribute('src', filepath);
     this.audio.setAttribute('id', index);
