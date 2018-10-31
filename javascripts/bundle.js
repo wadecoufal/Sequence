@@ -103,7 +103,18 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-var NOTES = {};
+var NOTES = {
+  0: "./assets/sound_files/glock_d1.wav",
+  1: "./assets/sound_files/glock_e1.wav",
+  2: "./assets/sound_files/glock_f1.wav",
+  3: "./assets/sound_files/glock_g1.wav",
+  4: "./assets/sound_files/glock_a2.wav",
+  5: "./assets/sound_files/glock_b2.wav",
+  6: './assets/sound_files/glock_c2.wav',
+  7: './assets/sound_files/glock_cs2.wav',
+  8: './assets/sound_files/glock_d2.wav',
+  9: './assets/sound_files/glock_e2.wav'
+};
 
 var Sequencer =
 /*#__PURE__*/
@@ -115,22 +126,57 @@ function () {
     this.addSquares();
     this.ctx = ctx;
     this.audioCtx = audioCtx;
+    this.currentColumn = 0;
+    this.startSequence();
   }
 
   _createClass(Sequencer, [{
+    key: "startSequence",
+    value: function startSequence() {
+      var _this = this;
+
+      setInterval(function () {
+        _this.triggerSquares(_this.currentColumn);
+
+        _this.currentColumn = (_this.currentColumn + 1) % 10;
+      }, 200);
+    }
+  }, {
+    key: "triggerSquares",
+    value: function triggerSquares(column) {
+      var _this2 = this;
+
+      console.log('COLUMN: ', column);
+      var squareIndices = [];
+
+      while (squareIndices.length < 10) {
+        squareIndices.push(this.squares[column]);
+        column += 10;
+      }
+
+      console.log('INDICES: ', squareIndices);
+      squareIndices.forEach(function (squareIndex) {
+        squareIndex.soundNote();
+        squareIndex.draw(_this2.ctx);
+      });
+    }
+  }, {
     key: "addSquares",
     value: function addSquares() {
       var x = 0;
       var y = 0;
+      var row = 0;
 
       for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
-          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y));
+          var newSquareIndex = this.squares.length;
+          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, NOTES[row], newSquareIndex));
           x += 50;
         }
 
         x = 0;
         y += 50;
+        row += 1;
       }
     }
   }, {
@@ -158,10 +204,8 @@ function () {
           x = _this$getCursorPos.x,
           y = _this$getCursorPos.y;
 
-      console.log('x', x, 'y', y);
       var squareIdx = this.squareIndexAtPos(x, y);
-      console.log(squareIdx);
-      this.squares[squareIdx].toggleColor();
+      this.squares[squareIdx].toggle();
       this.squares[squareIdx].draw(this.ctx);
     }
   }, {
@@ -198,7 +242,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Square =
 /*#__PURE__*/
 function () {
-  function Square(x, y) {
+  function Square(x, y, filepath, index) {
     _classCallCheck(this, Square);
 
     // note value
@@ -209,19 +253,49 @@ function () {
     this.x = x;
     this.y = y;
     this.color = 'gray';
+    this.toggled = false;
+    this.index = index; // audio
+
+    this.audio = document.createElement('audio');
+    this.audio.setAttribute('src', filepath);
+    this.audio.setAttribute('id', index);
+    this.audio.setAttribute('type', 'audio/wav');
+    document.body.appendChild(this.audio);
   }
 
   _createClass(Square, [{
     key: "soundNote",
     value: function soundNote() {
-      if (this.toggled) {} else {}
+      var _this = this;
+
+      if (this.toggled) {
+        setTimeout(function () {
+          _this.audio.currentTime = 0;
+
+          _this.audio.play();
+        }, 0);
+
+        if (this.color === 'red') {
+          this.color = 'pink';
+        } else {
+          this.color = 'red';
+        }
+      } else {
+        if (this.color === 'gray') {
+          this.color = 'blue';
+        } else {
+          this.color = 'gray';
+        }
+      }
     }
   }, {
-    key: "toggleColor",
-    value: function toggleColor() {
-      if (this.color === 'gray') {
+    key: "toggle",
+    value: function toggle() {
+      if (this.toggled === false) {
+        this.toggled = true;
         this.color = 'red';
       } else {
+        this.toggled = false;
         this.color = 'gray';
       }
     }
@@ -255,35 +329,16 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener("DOMContentLoaded", function () {
   var canvas = document.getElementById("canvas");
-  var audio = document.getElementById("audio");
   canvas.width = 500;
   canvas.height = 500;
   var AudioContext = window.AudioContext || window.webkitAudioContext;
   var audioCtx = new AudioContext();
-  var track = audioCtx.createMediaElementSource(audio);
-  track.connect(audioCtx.destination);
   var ctx = canvas.getContext("2d");
   var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, audioCtx);
   sequencer.draw(ctx);
   canvas.addEventListener('click', function (e) {
     return sequencer.toggleSquareAtPos(canvas, event);
   });
-  canvas.addEventListener('click', function () {
-    audio.play(); // check if context is in suspended state (autoplay policy)
-
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    } // play or pause track depending on state
-
-
-    if (this.dataset.playing === 'false') {
-      audio.play();
-      this.dataset.playing = 'true';
-    } else if (this.dataset.playing === 'true') {
-      audio.pause();
-      this.dataset.playing = 'false';
-    }
-  }, false);
 });
 
 /***/ })
