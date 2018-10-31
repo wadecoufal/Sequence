@@ -115,6 +115,25 @@ var NOTES = {
   8: './assets/sound_files/glock_d2.wav',
   9: './assets/sound_files/glock_e2.wav'
 };
+var MARIMBA = {
+  6: "./assets/sound_files/marimba/mar_b3.wav",
+  9: "./assets/sound_files/marimba/mar_c3.wav",
+  8: "./assets/sound_files/marimba/mar_e3.wav",
+  7: "./assets/sound_files/marimba/mar_g3.wav",
+  3: "./assets/sound_files/marimba/mar_a4.wav",
+  5: "./assets/sound_files/marimba/mar_d4.wav",
+  4: "./assets/sound_files/marimba/mar_f4.wav",
+  0: "./assets/sound_files/marimba/mar_b5.wav",
+  2: "./assets/sound_files/marimba/mar_c5.wav",
+  1: "./assets/sound_files/marimba/mar_e5.wav"
+}; // const COLORS = [
+//   "#ff70b2",
+//   "#ff6394",
+//   "#ff4f75",
+//   "#ff3a4b",
+//   "#ff2134",
+//   "#e5091c"
+// ];
 
 var Sequencer =
 /*#__PURE__*/
@@ -127,6 +146,19 @@ function () {
     this.ctx = ctx;
     this.audioCtx = audioCtx;
     this.currentColumn = 0;
+    this.currentColorIdx = 0;
+    this.red = {
+      value: 150,
+      dir: 'desc'
+    };
+    this.blue = {
+      value: 50,
+      dir: 'desc'
+    };
+    this.green = {
+      value: 25,
+      dir: 'asc'
+    };
     this.startSequence();
   }
 
@@ -146,19 +178,52 @@ function () {
     value: function triggerSquares(column) {
       var _this2 = this;
 
-      console.log('COLUMN: ', column);
       var squareIndices = [];
 
       while (squareIndices.length < 10) {
         squareIndices.push(this.squares[column]);
         column += 10;
+      } // const currentColor = COLORS[this.currentColorIdx];
+
+
+      var currentColor = "rgb(".concat(this.red.value, ", ").concat(this.blue.value, ", ").concat(this.green.value, ")");
+      squareIndices.forEach(function (squareIndex) {
+        squareIndex.soundNote(currentColor);
+        squareIndex.draw(_this2.ctx);
+      }); // this.currentColorIdx = (this.currentColorIdx + 1) % 6;
+
+      this.updateCurrentColor();
+    }
+  }, {
+    key: "updateCurrentColor",
+    value: function updateCurrentColor() {
+      this.red = this.updateColorValue(this.red);
+      this.blue = this.updateColorValue(this.blue);
+      this.green = this.updateColorValue(this.green);
+    }
+  }, {
+    key: "updateColorValue",
+    value: function updateColorValue(color) {
+      var newColor = {
+        dir: color.dir,
+        value: color.value
+      };
+
+      if (color.dir === 'asc' && color.value > 144) {
+        newColor.dir = 'desc';
+        newColor.value -= 4;
+      } else if (color.dir === 'desc' && color.value < 12) {
+        newColor.dir = 'asc';
+        newColor.value += 4;
+      } else {
+        if (color.dir === 'asc') {
+          newColor.value += 4;
+        } else {
+          newColor.value -= 4;
+        }
       }
 
-      console.log('INDICES: ', squareIndices);
-      squareIndices.forEach(function (squareIndex) {
-        squareIndex.soundNote();
-        squareIndex.draw(_this2.ctx);
-      });
+      return newColor;
     }
   }, {
     key: "addSquares",
@@ -170,7 +235,7 @@ function () {
       for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
           var newSquareIndex = this.squares.length;
-          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, NOTES[row], newSquareIndex));
+          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, MARIMBA[row], newSquareIndex));
           x += 50;
         }
 
@@ -245,17 +310,12 @@ function () {
   function Square(x, y, filepath, index) {
     _classCallCheck(this, Square);
 
-    // note value
-    // toggled?
-    // color
-    // position
-    // width/height
     this.x = x;
     this.y = y;
-    this.color = 'gray';
+    this.color = 'black';
+    this.newColor = 'black';
     this.toggled = false;
-    this.index = index; // audio
-
+    this.index = index;
     this.audio = document.createElement('audio');
     this.audio.setAttribute('src', filepath);
     this.audio.setAttribute('id', index);
@@ -265,8 +325,10 @@ function () {
 
   _createClass(Square, [{
     key: "soundNote",
-    value: function soundNote() {
+    value: function soundNote(nextColor) {
       var _this = this;
+
+      this.newColor = nextColor;
 
       if (this.toggled) {
         setTimeout(function () {
@@ -274,18 +336,8 @@ function () {
 
           _this.audio.play();
         }, 0);
-
-        if (this.color === 'red') {
-          this.color = 'pink';
-        } else {
-          this.color = 'red';
-        }
       } else {
-        if (this.color === 'gray') {
-          this.color = 'blue';
-        } else {
-          this.color = 'gray';
-        }
+        this.color = nextColor;
       }
     }
   }, {
@@ -293,10 +345,10 @@ function () {
     value: function toggle() {
       if (this.toggled === false) {
         this.toggled = true;
-        this.color = 'red';
+        this.color = 'white';
       } else {
         this.toggled = false;
-        this.color = 'gray';
+        this.color = this.newColor;
       }
     }
   }, {

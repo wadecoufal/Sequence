@@ -6,8 +6,7 @@ body {
   bottom: 0;
   background-color: black;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
 }
 
 .sequence-header {
@@ -15,20 +14,23 @@ body {
   font-family: sans-serif;
   font-size: 72px;
   font-weight: 700;
+  text-align: center;
 }
 
-.options-bar {
-  display: flex;
-  justify-content: space-around;
-  width: 1250px;
-  height: 200px;
-  background-color: purple;
-}
-
-.dropdown {
+.key-dropdown {
   background-color: pink;
   width: 250px;
-  height: 40px;
+  height: 300px;
+}
+
+.instrument-dropdown {
+  background-color: pink;
+  width: 250px;
+  height: 300px;
+}
+
+.hidden {
+  display: none;
 }
 
 .bpm-btm {

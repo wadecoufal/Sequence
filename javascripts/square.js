@@ -1,17 +1,12 @@
 class Square {
   constructor(x, y, filepath, index) {
-    // note value
-    // toggled?
-    // color
-    // position
-    // width/height
     this.x = x;
     this.y = y;
-    this.color = 'gray';
+    this.color = 'black';
+    this.newColor = 'black';
     this.toggled = false;
     this.index = index
 
-    // audio
     this.audio = document.createElement('audio');
     this.audio.setAttribute('src', filepath);
     this.audio.setAttribute('id', index);
@@ -19,33 +14,25 @@ class Square {
     document.body.appendChild(this.audio);
   }
 
-  soundNote() {
+  soundNote(nextColor) {
+    this.newColor = nextColor;
     if (this.toggled) {
       setTimeout( () => {
         this.audio.currentTime = 0;
         this.audio.play()
       }, 0);
-      if (this.color === 'red') {
-        this.color = 'pink'
-      } else {
-        this.color = 'red';
-      }
     } else {
-      if (this.color === 'gray') {
-        this.color = 'blue';
-      } else {
-        this.color = 'gray';
-      }
+      this.color = nextColor;
     }
   }
 
   toggle() {
     if (this.toggled === false) {
       this.toggled = true;
-      this.color = 'red';
+      this.color = 'white';
     } else {
       this.toggled = false;
-      this.color = 'gray';
+      this.color = this.newColor;
     }
   }
 
