@@ -86,10 +86,17 @@ body {
 
 .bpm p {
   font-size: 32px;
+  transition: 0.3s;
 }
 
-.bpm div {
-  background: linear-gradient(rgba(255, 63, 172, 0.7), #260b0c);
+.bpm p:hover {
+  cursor: pointer;
+  color: red;
+  transition: 0.3s;
+}
+
+#bpm-display {
+  background-color: rgba(255, 63, 172, 0.7);
   border: 2px solid white;
   border-radius: 50%;
   width: 100px;
@@ -99,7 +106,10 @@ body {
   transition: 0.3s;
 }
 
-.bpm div:hover {
-  background: linear-gradient(rgb(4, 4, 4);
+#bpm-display:hover {
+  background-color: black;
+  color: red;
+  border: 2px solid red;
   transition: 0.3s;
+  cursor: pointer;
 }

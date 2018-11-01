@@ -33,22 +33,12 @@ class Util {
 
     const instrumentFilePaths = INSTRUMENTS[instrumentName];
     let row = -1;
-
-    let volume;
-    if (instrumentName === 'Marimba') {
-      volume = 1.0;
-    } else {
-      volume = 0.1;
-    }
     
     for (let idx = 0; idx < allAudioTags.length; idx++) {
       if (idx % 10 === 0) {
         row += 1;
       }
       allAudioTags[idx].setAttribute("src", instrumentFilePaths[row]);
-      console.log('volume', volume);
-      allAudioTags[idx].volume = volume;
-      console.log('audioTag', allAudioTags[idx]);
     }
   }
 

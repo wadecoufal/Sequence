@@ -53,15 +53,27 @@ class Sequencer {
     this.green = COLOR_SCHEMES["Colorful"]["green"];
 
     this.changeColor = this.changeColor.bind(this);
+    this.changeBpm = this.changeBpm.bind(this);
 
-    this.startSequence();
+    this.tempo = 200;
+    this.sequencing = this.startSequence();
   }
 
   startSequence() {
-    setInterval( () => {
+    return setInterval( () => {
       this.triggerSquares(this.currentColumn);
       this.currentColumn = (this.currentColumn + 1) % 10;
-    }, 200);
+    }, 292);
+  }
+
+  changeBpm(newTempo) {
+    clearInterval(this.sequencing);
+    this.currentColumn = 0;
+    this.tempo = newTempo;
+    this.sequencing = setInterval( () => {
+      this.triggerSquares(this.currentColumn);
+      this.currentColumn = (this.currentColumn + 1) % 10;
+    }, this.tempo);
   }
 
   changeColor(colorScheme) {

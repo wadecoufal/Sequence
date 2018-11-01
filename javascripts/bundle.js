@@ -192,7 +192,9 @@ function () {
     this.blue = COLOR_SCHEMES["Colorful"]["blue"];
     this.green = COLOR_SCHEMES["Colorful"]["green"];
     this.changeColor = this.changeColor.bind(this);
-    this.startSequence();
+    this.changeBpm = this.changeBpm.bind(this);
+    this.tempo = 200;
+    this.sequencing = this.startSequence();
   }
 
   _createClass(Sequencer, [{
@@ -200,11 +202,25 @@ function () {
     value: function startSequence() {
       var _this = this;
 
-      setInterval(function () {
+      return setInterval(function () {
         _this.triggerSquares(_this.currentColumn);
 
         _this.currentColumn = (_this.currentColumn + 1) % 10;
-      }, 200);
+      }, 292);
+    }
+  }, {
+    key: "changeBpm",
+    value: function changeBpm(newTempo) {
+      var _this2 = this;
+
+      clearInterval(this.sequencing);
+      this.currentColumn = 0;
+      this.tempo = newTempo;
+      this.sequencing = setInterval(function () {
+        _this2.triggerSquares(_this2.currentColumn);
+
+        _this2.currentColumn = (_this2.currentColumn + 1) % 10;
+      }, this.tempo);
     }
   }, {
     key: "changeColor",
@@ -216,7 +232,7 @@ function () {
   }, {
     key: "triggerSquares",
     value: function triggerSquares(column) {
-      var _this2 = this;
+      var _this3 = this;
 
       var squareIndices = [];
 
@@ -229,7 +245,7 @@ function () {
       var currentColor = "rgb(".concat(this.red.value, ", ").concat(this.blue.value, ", ").concat(this.green.value, ")");
       squareIndices.forEach(function (squareIndex) {
         squareIndex.soundNote(currentColor);
-        squareIndex.draw(_this2.ctx);
+        squareIndex.draw(_this3.ctx);
       }); // this.currentColorIdx = (this.currentColorIdx + 1) % 6;
 
       this.updateCurrentColor();
@@ -478,13 +494,6 @@ function () {
       var instrumentName = event.target.textContent;
       var instrumentFilePaths = INSTRUMENTS[instrumentName];
       var row = -1;
-      var volume;
-
-      if (instrumentName === 'Marimba') {
-        volume = 1.0;
-      } else {
-        volume = 0.1;
-      }
 
       for (var idx = 0; idx < allAudioTags.length; idx++) {
         if (idx % 10 === 0) {
@@ -492,9 +501,6 @@ function () {
         }
 
         allAudioTags[idx].setAttribute("src", instrumentFilePaths[row]);
-        console.log('volume', volume);
-        allAudioTags[idx].volume = volume;
-        console.log('audioTag', allAudioTags[idx]);
       }
     }
   }, {
@@ -529,6 +535,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var canvas = document.getElementById("canvas");
   var colors = document.getElementById('colors');
   var instruments = document.getElementById('instruments');
+  var plus = document.getElementById('plus');
+  var minus = document.getElementById('minus');
   canvas.width = 500;
   canvas.height = 500;
   var ctx = canvas.getContext("2d");
@@ -543,6 +551,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   colors.addEventListener('click', function (event) {
     return util.changeColorScheme(event, sequencer);
+  });
+  plus.addEventListener('click', function () {
+    var tempoTag = document.getElementById('bpm-display');
+    var currentTempo = parseInt(tempoTag.textContent.split(' ')[0]);
+    var newTempo = Math.floor(60000 / (currentTempo + 5));
+    tempoTag.textContent = "".concat(currentTempo + 5, " BPM");
+    sequencer.changeBpm(newTempo);
+  });
+  minus.addEventListener("click", function () {
+    var tempoTag = document.getElementById("bpm-display");
+    var currentTempo = parseInt(tempoTag.textContent.split(" ")[0]);
+    var newTempo = Math.floor(60000 / (currentTempo - 5));
+    tempoTag.textContent = "".concat(currentTempo - 5, " BPM");
+    sequencer.changeBpm(newTempo);
   });
 });
 
