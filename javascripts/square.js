@@ -22,7 +22,7 @@ class Square {
     if (this.toggled) {
       setTimeout( () => {
         this.audio.currentTime = 0;
-        this.audio.play()
+        this.audio.play();
       }, 0);
     } else {
       this.color = nextColor;

@@ -4,7 +4,7 @@ import Util from './javascripts/util.js';
 document.addEventListener("DOMContentLoaded", () => {
   console.log('111');
   const canvas = document.getElementById("canvas");
-  const keys = document.getElementById('keys');
+  const colors = document.getElementById('colors');
   const instruments = document.getElementById('instruments');
 
   canvas.width = 500;
@@ -17,4 +17,5 @@ document.addEventListener("DOMContentLoaded", () => {
  
   canvas.addEventListener('click', (event) => sequencer.toggleSquareAtPos(canvas, event));
   instruments.addEventListener('click', (event) => util.changeInstrument(event));
+  colors.addEventListener('click', (event) => util.changeColorScheme(event, sequencer));
 });

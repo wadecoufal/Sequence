@@ -124,32 +124,55 @@ var MARIMBA = {
   1: "./assets/sound_files/marimba/mar_e5.wav"
 };
 var COLOR_SCHEMES = {
-  'colorful': {
+  'Colorful': {
     'red': {
       value: 150,
-      dir: 'desc'
+      dir: "desc",
+      changeVal: 4
     },
     'green': {
       value: 25,
-      dir: 'asc'
+      dir: "asc",
+      changeVal: 4
     },
     'blue': {
       value: 50,
-      dir: 'desc'
+      dir: "desc",
+      changeVal: 4
     }
   },
-  'muted': {
+  'Muted': {
     'red': {
       value: 0,
-      dir: 'desc'
+      dir: "desc",
+      changeVal: 4
     },
     'green': {
       value: 0,
-      dir: 'asc'
+      dir: "asc",
+      changeVal: 4
     },
     'blue': {
       value: 0,
-      dir: 'desc'
+      dir: "desc",
+      changeVal: 4
+    }
+  },
+  'Blue': {
+    'red': {
+      value: 0,
+      dir: "desc",
+      changeVal: 0
+    },
+    'green': {
+      value: 0,
+      dir: "asc",
+      changeVal: 4
+    },
+    'blue': {
+      value: 70,
+      dir: "desc",
+      changeVal: 4
     }
   }
 };
@@ -165,18 +188,10 @@ function () {
     this.ctx = ctx;
     this.currentColumn = 0;
     this.currentColorIdx = 0;
-    this.red = {
-      value: 150,
-      dir: 'desc'
-    };
-    this.blue = {
-      value: 50,
-      dir: 'desc'
-    };
-    this.green = {
-      value: 25,
-      dir: 'asc'
-    };
+    this.red = COLOR_SCHEMES['Colorful']['red'];
+    this.blue = COLOR_SCHEMES["Colorful"]["blue"];
+    this.green = COLOR_SCHEMES["Colorful"]["green"];
+    this.changeColor = this.changeColor.bind(this);
     this.startSequence();
   }
 
@@ -190,6 +205,13 @@ function () {
 
         _this.currentColumn = (_this.currentColumn + 1) % 10;
       }, 200);
+    }
+  }, {
+    key: "changeColor",
+    value: function changeColor(colorScheme) {
+      this.red = COLOR_SCHEMES[colorScheme].red;
+      this.green = COLOR_SCHEMES[colorScheme].green;
+      this.blue = COLOR_SCHEMES[colorScheme].blue;
     }
   }, {
     key: "triggerSquares",
@@ -224,20 +246,21 @@ function () {
     value: function updateColorValue(color) {
       var newColor = {
         dir: color.dir,
-        value: color.value
+        value: color.value,
+        changeVal: color.changeVal
       };
 
       if (color.dir === 'asc' && color.value > 144) {
         newColor.dir = 'desc';
-        newColor.value -= 4;
+        newColor.value -= color.changeVal;
       } else if (color.dir === 'desc' && color.value < 12) {
         newColor.dir = 'asc';
-        newColor.value += 4;
+        newColor.value += color.changeVal;
       } else {
         if (color.dir === 'asc') {
-          newColor.value += 4;
+          newColor.value += color.changeVal;
         } else {
-          newColor.value -= 4;
+          newColor.value -= color.changeVal;
         }
       }
 
@@ -474,6 +497,11 @@ function () {
         console.log('audioTag', allAudioTags[idx]);
       }
     }
+  }, {
+    key: "changeColorScheme",
+    value: function changeColorScheme(event, sequencer) {
+      sequencer.changeColor(event.target.textContent);
+    }
   }]);
 
   return Util;
@@ -499,7 +527,7 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener("DOMContentLoaded", function () {
   console.log('111');
   var canvas = document.getElementById("canvas");
-  var keys = document.getElementById('keys');
+  var colors = document.getElementById('colors');
   var instruments = document.getElementById('instruments');
   canvas.width = 500;
   canvas.height = 500;
@@ -512,6 +540,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   instruments.addEventListener('click', function (event) {
     return util.changeInstrument(event);
+  });
+  colors.addEventListener('click', function (event) {
+    return util.changeColorScheme(event, sequencer);
   });
 });
 

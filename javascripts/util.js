@@ -52,6 +52,10 @@ class Util {
     }
   }
 
+  changeColorScheme(event, sequencer) {
+    sequencer.changeColor(event.target.textContent);
+  }
+
 }
 
 export default Util;

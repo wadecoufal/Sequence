@@ -5,7 +5,8 @@
   "main": "sequence.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --watch --mode=development"
+    "webpack": "webpack --watch --mode=development",
+    "server": "python -m http.server 8000"
   },
   "repository": {
     "type": "git",
