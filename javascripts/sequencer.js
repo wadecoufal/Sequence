@@ -57,6 +57,7 @@ class Sequencer {
 
     this.tempo = 200;
     this.sequencing = this.startSequence();
+    this.toggleSquareAtPos = this.toggleSquareAtPos.bind(this);
   }
 
   startSequence() {
@@ -66,7 +67,18 @@ class Sequencer {
     }, 292);
   }
 
-  changeBpm(newTempo) {
+  resetSequence() {
+    clearInterval(this.sequencing);
+    this.currentColumn = 0;
+    this.sequencing = setInterval(() => {
+      this.triggerSquares(this.currentColumn);
+      this.currentColumn = (this.currentColumn + 1) % 10;
+    }, this.tempo);
+  }
+
+  changeBpm(newTempo, newTextVal) {
+    document.getElementById('bpm-display').textContent = `${newTextVal} BPM`;
+
     clearInterval(this.sequencing);
     this.currentColumn = 0;
     this.tempo = newTempo;
@@ -88,14 +100,12 @@ class Sequencer {
       squareIndices.push(this.squares[column]);
       column += 10;
     }
-    // const currentColor = COLORS[this.currentColorIdx];
 
     const currentColor = `rgb(${this.red.value}, ${this.blue.value}, ${this.green.value})`
     squareIndices.forEach(squareIndex => {
       squareIndex.soundNote(currentColor);
       squareIndex.draw(this.ctx);
     })
-    // this.currentColorIdx = (this.currentColorIdx + 1) % 6;
 
     this.updateCurrentColor();
   }
@@ -164,7 +174,29 @@ class Sequencer {
     return {x, y};
   }
 
-  toggleSquareAtPos(canvas, event) {
+  presetConfig(presetIndices) {
+    const canvas = document.getElementById("canvas");
+    presetIndices.forEach( idx => {
+      this.toggleSquareAtPos(canvas, null, idx);
+    })
+  }
+
+  untoggleAllSquares() {
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.squares.forEach( square => {
+      if (square.toggled) {
+        square.toggle();
+      }
+    })
+  }
+
+  toggleSquareAtPos(canvas, event, idx) {
+    if (idx >= 0) {
+      this.squares[idx].toggle();
+      this.squares[idx].draw(this.ctx);
+      return;
+    }
+
     const {x, y} = this.getCursorPos(canvas, event);
     const squareIdx = this.squareIndexAtPos(x, y);
     this.squares[squareIdx].toggle();

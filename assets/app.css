@@ -44,6 +44,12 @@ body {
   transition: 0.3s;
 }
 
+#presets {
+  list-style: none;
+  height: 300px;
+  width: 250px;
+}
+
 #instruments {
   list-style: none;
   height: 300px;

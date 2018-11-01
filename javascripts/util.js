@@ -25,11 +25,38 @@ const INSTRUMENTS = {
   }
 }
 
+const PRESETS = {
+  'Preset 1': {
+    bpm: 60,
+    instrument: 'Glockenspiel',
+    squareIndices: [0, 99],
+    colorScheme: 'Muted'
+  },
+  'Preset 2': {
+    bpm: 120,
+    instrument: 'Marimba',
+    squareIndices: [1,2,3,4,5,6],
+    colorScheme: 'Blue'
+  },
+  'Preset 3': {
+    bpm: 180,
+    instrument: 'Glockenspiel',
+    squareIndices: [22, 33, 43, 77],
+    colorScheme: 'Colorful'
+  }
+}
+
 class Util {
 
-  changeInstrument (event) {
+  changeInstrument (event, instrument) {
     const allAudioTags = document.getElementsByTagName('audio');
-    const instrumentName = event.target.textContent;
+
+    let instrumentName;
+    if (instrument) {
+      instrumentName = instrument;
+    } else {
+      instrumentName = event.target.textContent;
+    }
 
     const instrumentFilePaths = INSTRUMENTS[instrumentName];
     let row = -1;
@@ -42,8 +69,28 @@ class Util {
     }
   }
 
-  changeColorScheme(event, sequencer) {
-    sequencer.changeColor(event.target.textContent);
+  changeColorScheme(event, sequencer, colorScheme) {
+    let newColorScheme;
+    if (colorScheme) {
+      newColorScheme = colorScheme;
+    } else {
+      newColorScheme = event.target.textContent;
+    }
+    sequencer.changeColor(newColorScheme);
+  }
+
+  setPreset(event, sequencer) {
+    const presetName = event.target.textContent;
+    const preset = PRESETS[presetName];
+    
+    this.changeColorScheme(null, sequencer, preset.colorScheme);
+    this.changeInstrument(null, preset.instrument);
+    const newTempo = Math.floor(60000 / preset.bpm);
+    sequencer.changeBpm(newTempo, preset.bpm);
+    sequencer.untoggleAllSquares();
+    preset.squareIndices.forEach( squareIdx => {
+      sequencer.toggleSquareAtPos(null, null, squareIdx);
+    })
   }
 
 }

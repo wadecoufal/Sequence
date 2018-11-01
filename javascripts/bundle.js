@@ -195,6 +195,7 @@ function () {
     this.changeBpm = this.changeBpm.bind(this);
     this.tempo = 200;
     this.sequencing = this.startSequence();
+    this.toggleSquareAtPos = this.toggleSquareAtPos.bind(this);
   }
 
   _createClass(Sequencer, [{
@@ -209,17 +210,31 @@ function () {
       }, 292);
     }
   }, {
-    key: "changeBpm",
-    value: function changeBpm(newTempo) {
+    key: "resetSequence",
+    value: function resetSequence() {
       var _this2 = this;
 
       clearInterval(this.sequencing);
       this.currentColumn = 0;
-      this.tempo = newTempo;
       this.sequencing = setInterval(function () {
         _this2.triggerSquares(_this2.currentColumn);
 
         _this2.currentColumn = (_this2.currentColumn + 1) % 10;
+      }, this.tempo);
+    }
+  }, {
+    key: "changeBpm",
+    value: function changeBpm(newTempo, newTextVal) {
+      var _this3 = this;
+
+      document.getElementById('bpm-display').textContent = "".concat(newTextVal, " BPM");
+      clearInterval(this.sequencing);
+      this.currentColumn = 0;
+      this.tempo = newTempo;
+      this.sequencing = setInterval(function () {
+        _this3.triggerSquares(_this3.currentColumn);
+
+        _this3.currentColumn = (_this3.currentColumn + 1) % 10;
       }, this.tempo);
     }
   }, {
@@ -232,22 +247,20 @@ function () {
   }, {
     key: "triggerSquares",
     value: function triggerSquares(column) {
-      var _this3 = this;
+      var _this4 = this;
 
       var squareIndices = [];
 
       while (squareIndices.length < 10) {
         squareIndices.push(this.squares[column]);
         column += 10;
-      } // const currentColor = COLORS[this.currentColorIdx];
-
+      }
 
       var currentColor = "rgb(".concat(this.red.value, ", ").concat(this.blue.value, ", ").concat(this.green.value, ")");
       squareIndices.forEach(function (squareIndex) {
         squareIndex.soundNote(currentColor);
-        squareIndex.draw(_this3.ctx);
-      }); // this.currentColorIdx = (this.currentColorIdx + 1) % 6;
-
+        squareIndex.draw(_this4.ctx);
+      });
       this.updateCurrentColor();
     }
   }, {
@@ -331,8 +344,34 @@ function () {
       };
     }
   }, {
+    key: "presetConfig",
+    value: function presetConfig(presetIndices) {
+      var _this5 = this;
+
+      var canvas = document.getElementById("canvas");
+      presetIndices.forEach(function (idx) {
+        _this5.toggleSquareAtPos(canvas, null, idx);
+      });
+    }
+  }, {
+    key: "untoggleAllSquares",
+    value: function untoggleAllSquares() {
+      this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+      this.squares.forEach(function (square) {
+        if (square.toggled) {
+          square.toggle();
+        }
+      });
+    }
+  }, {
     key: "toggleSquareAtPos",
-    value: function toggleSquareAtPos(canvas, event) {
+    value: function toggleSquareAtPos(canvas, event, idx) {
+      if (idx >= 0) {
+        this.squares[idx].toggle();
+        this.squares[idx].draw(this.ctx);
+        return;
+      }
+
       var _this$getCursorPos = this.getCursorPos(canvas, event),
           x = _this$getCursorPos.x,
           y = _this$getCursorPos.y;
@@ -479,6 +518,26 @@ var INSTRUMENTS = {
     9: './assets/sound_files/glock_e2.wav'
   }
 };
+var PRESETS = {
+  'Preset 1': {
+    bpm: 60,
+    instrument: 'Glockenspiel',
+    squareIndices: [0, 99],
+    colorScheme: 'Muted'
+  },
+  'Preset 2': {
+    bpm: 120,
+    instrument: 'Marimba',
+    squareIndices: [1, 2, 3, 4, 5, 6],
+    colorScheme: 'Blue'
+  },
+  'Preset 3': {
+    bpm: 180,
+    instrument: 'Glockenspiel',
+    squareIndices: [22, 33, 43, 77],
+    colorScheme: 'Colorful'
+  }
+};
 
 var Util =
 /*#__PURE__*/
@@ -489,9 +548,16 @@ function () {
 
   _createClass(Util, [{
     key: "changeInstrument",
-    value: function changeInstrument(event) {
+    value: function changeInstrument(event, instrument) {
       var allAudioTags = document.getElementsByTagName('audio');
-      var instrumentName = event.target.textContent;
+      var instrumentName;
+
+      if (instrument) {
+        instrumentName = instrument;
+      } else {
+        instrumentName = event.target.textContent;
+      }
+
       var instrumentFilePaths = INSTRUMENTS[instrumentName];
       var row = -1;
 
@@ -505,8 +571,30 @@ function () {
     }
   }, {
     key: "changeColorScheme",
-    value: function changeColorScheme(event, sequencer) {
-      sequencer.changeColor(event.target.textContent);
+    value: function changeColorScheme(event, sequencer, colorScheme) {
+      var newColorScheme;
+
+      if (colorScheme) {
+        newColorScheme = colorScheme;
+      } else {
+        newColorScheme = event.target.textContent;
+      }
+
+      sequencer.changeColor(newColorScheme);
+    }
+  }, {
+    key: "setPreset",
+    value: function setPreset(event, sequencer) {
+      var presetName = event.target.textContent;
+      var preset = PRESETS[presetName];
+      this.changeColorScheme(null, sequencer, preset.colorScheme);
+      this.changeInstrument(null, preset.instrument);
+      var newTempo = Math.floor(60000 / preset.bpm);
+      sequencer.changeBpm(newTempo, preset.bpm);
+      sequencer.untoggleAllSquares();
+      preset.squareIndices.forEach(function (squareIdx) {
+        sequencer.toggleSquareAtPos(null, null, squareIdx);
+      });
     }
   }]);
 
@@ -535,6 +623,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var canvas = document.getElementById("canvas");
   var colors = document.getElementById('colors');
   var instruments = document.getElementById('instruments');
+  var presets = document.getElementById('presets');
   var plus = document.getElementById('plus');
   var minus = document.getElementById('minus');
   canvas.width = 500;
@@ -547,24 +636,28 @@ document.addEventListener("DOMContentLoaded", function () {
     return sequencer.toggleSquareAtPos(canvas, event);
   });
   instruments.addEventListener('click', function (event) {
-    return util.changeInstrument(event);
+    util.changeInstrument(event);
+    sequencer.resetSequence();
   });
   colors.addEventListener('click', function (event) {
     return util.changeColorScheme(event, sequencer);
+  });
+  presets.addEventListener('click', function (event) {
+    return util.setPreset(event, sequencer);
   });
   plus.addEventListener('click', function () {
     var tempoTag = document.getElementById('bpm-display');
     var currentTempo = parseInt(tempoTag.textContent.split(' ')[0]);
     var newTempo = Math.floor(60000 / (currentTempo + 5));
-    tempoTag.textContent = "".concat(currentTempo + 5, " BPM");
-    sequencer.changeBpm(newTempo);
+    var newTextVal = currentTempo + 5;
+    sequencer.changeBpm(newTempo, newTextVal);
   });
   minus.addEventListener("click", function () {
     var tempoTag = document.getElementById("bpm-display");
     var currentTempo = parseInt(tempoTag.textContent.split(" ")[0]);
     var newTempo = Math.floor(60000 / (currentTempo - 5));
-    tempoTag.textContent = "".concat(currentTempo - 5, " BPM");
-    sequencer.changeBpm(newTempo);
+    var newTextVal = currentTempo - 5;
+    sequencer.changeBpm(newTempo, newTextVal);
   });
 });
 
