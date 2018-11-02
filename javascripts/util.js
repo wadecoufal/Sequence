@@ -93,6 +93,18 @@ class Util {
     })
   }
 
+  setStyle(event, sequencer) {
+    console.log('IN UTIL');
+    console.log('event', event.target.textContent);
+    const style = event.target.textContent;
+    sequencer.changeStyle(style);
+  }
+
+  createRandomPreset() {
+    // const preset;
+    // preset.instrument = Math.floor(Math.random() * INSTRUMENTS.length)
+  }
+
 }
 
 export default Util;

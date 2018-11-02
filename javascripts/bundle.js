@@ -196,6 +196,8 @@ function () {
     this.tempo = 200;
     this.sequencing = this.startSequence();
     this.toggleSquareAtPos = this.toggleSquareAtPos.bind(this);
+    this.style = "Square";
+    this.changeStyle = this.changeStyle.bind(this);
   }
 
   _createClass(Sequencer, [{
@@ -245,6 +247,12 @@ function () {
       this.blue = COLOR_SCHEMES[colorScheme].blue;
     }
   }, {
+    key: "changeStyle",
+    value: function changeStyle(style) {
+      console.log('IN SEQUENCER CHANGE STYLE', style);
+      this.style = style;
+    }
+  }, {
     key: "triggerSquares",
     value: function triggerSquares(column) {
       var _this4 = this;
@@ -259,7 +267,7 @@ function () {
       var currentColor = "rgb(".concat(this.red.value, ", ").concat(this.blue.value, ", ").concat(this.green.value, ")");
       squareIndices.forEach(function (squareIndex) {
         squareIndex.soundNote(currentColor);
-        squareIndex.draw(_this4.ctx);
+        squareIndex.draw(_this4.ctx, _this4.style);
       });
       this.updateCurrentColor();
     }
@@ -328,8 +336,10 @@ function () {
   }, {
     key: "draw",
     value: function draw(ctx) {
+      var _this5 = this;
+
       this.squares.forEach(function (square) {
-        square.draw(ctx);
+        square.draw(ctx, _this5.style);
       });
     }
   }, {
@@ -346,11 +356,11 @@ function () {
   }, {
     key: "presetConfig",
     value: function presetConfig(presetIndices) {
-      var _this5 = this;
+      var _this6 = this;
 
       var canvas = document.getElementById("canvas");
       presetIndices.forEach(function (idx) {
-        _this5.toggleSquareAtPos(canvas, null, idx);
+        _this6.toggleSquareAtPos(canvas, null, idx);
       });
     }
   }, {
@@ -411,6 +421,32 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var TOTAL = 45;
+var DIVISOR = 2;
+var WIDTH = TOTAL / DIVISOR;
+var THICKNESS = 2;
+var TRIANGLE_POINTS = [[[THICKNESS, 0], [TOTAL - THICKNESS, 0], [TOTAL / 2, TOTAL / 2 - 2]], [[0, THICKNESS], [0, TOTAL - THICKNESS], [TOTAL / 2 - 2, TOTAL / 2]], [[THICKNESS, TOTAL], [TOTAL - THICKNESS, TOTAL], [TOTAL / 2, TOTAL / 2 + 2]], [[TOTAL, THICKNESS], [TOTAL, TOTAL - THICKNESS], [TOTAL / 2 + 2, TOTAL / 2]]];
+var GRAY_ONE = "rgb(66, 0, 43)"; // med
+
+var GRAY_TWO = 'rgb(45, 0, 22)'; // dark
+
+var GRAY_THREE = 'rgb(77, 0, 53)'; // light
+
+var PAIRS = {
+  1: [0, TOTAL],
+  2: [TOTAL, 0],
+  3: [0, 0],
+  4: [WIDTH / DIVISOR, WIDTH / DIVISOR],
+  5: [WIDTH / DIVISOR, TOTAL - WIDTH / DIVISOR],
+  6: [TOTAL - WIDTH / DIVISOR, WIDTH / DIVISOR],
+  7: [TOTAL - WIDTH / DIVISOR, TOTAL - WIDTH / DIVISOR],
+  8: [TOTAL, TOTAL]
+};
+var TRAPEZOID_POINTS = [[PAIRS[2], PAIRS[6], PAIRS[7], PAIRS[8]], [PAIRS[3], PAIRS[4], PAIRS[5], PAIRS[1]], [PAIRS[3], PAIRS[4], PAIRS[6], PAIRS[2]], [PAIRS[1], PAIRS[5], PAIRS[7], PAIRS[8]]]; // this.drawTrapezoid(ctx, PAIRS[3], PAIRS[4], PAIRS[5], PAIRS[1], GRAY_ONE); // left
+// this.drawTrapezoid(ctx, PAIRS[2], PAIRS[6], PAIRS[7], PAIRS[8], GRAY_ONE); // right
+// this.drawTrapezoid(ctx, PAIRS[3], PAIRS[4], PAIRS[6], PAIRS[2], GRAY_TWO); // top
+// this.drawTrapezoid(ctx, PAIRS[1], PAIRS[5], PAIRS[7], PAIRS[8], GRAY_THREE); // bottom
+
 var Square =
 /*#__PURE__*/
 function () {
@@ -419,16 +455,16 @@ function () {
 
     this.x = x;
     this.y = y;
-    this.color = 'black';
-    this.newColor = 'black';
+    this.color = "rgb(0, 0, 0)";
+    this.newColor = "rgb(0, 0, 0)";
     this.toggled = false;
     this.index = index; // this.audio = filepath;
     // set audio in sequencer (10 instead of 100)
 
-    this.audio = document.createElement('audio');
-    this.audio.setAttribute('src', filepath);
-    this.audio.setAttribute('id', index);
-    this.audio.setAttribute('type', 'audio/wav');
+    this.audio = document.createElement("audio");
+    this.audio.setAttribute("src", filepath);
+    this.audio.setAttribute("id", index);
+    this.audio.setAttribute("type", "audio/wav");
     document.body.appendChild(this.audio);
   }
 
@@ -454,7 +490,7 @@ function () {
     value: function toggle() {
       if (this.toggled === false) {
         this.toggled = true;
-        this.color = 'white';
+        this.color = "rgb(255, 255, 255)";
       } else {
         this.toggled = false;
         this.color = this.newColor;
@@ -462,11 +498,82 @@ function () {
     }
   }, {
     key: "draw",
-    value: function draw(ctx) {
+    value: function draw(ctx, style) {
+      console.log("IN DRAW SQUARE", style);
+      ctx.clearRect(this.x, this.y, 50, 50);
+
+      if (style === 'Jewel') {
+        this.drawTriangles(ctx);
+      } else if (style === 'Square') {
+        this.drawSquare(ctx);
+      } else if (style === 'Circle') {
+        this.drawSquare(ctx);
+      } else if (style === 'Tunnel') {
+        this.drawTrapezoids(ctx);
+      } // switch (style) {
+      //   case "Square":
+      //     this.drawSquare(ctx);
+      //   case "Circle":
+      //     this.drawSquare(ctx);
+      //   case "Jewel":
+      //     this.drawTriangles(ctx);
+      //   case "Tunnel":
+      //     this.drawTrapezoids(ctx);
+      //   default:
+      //     this.drawSquare(ctx);
+      // }
+
+    }
+  }, {
+    key: "drawSquare",
+    value: function drawSquare(ctx) {
       ctx.fillStyle = this.color;
-      ctx.fillRect(this.x, this.y, 45, 45); // ctx.beginPath();
-      // ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
-      // ctx.fill();
+      ctx.fillRect(this.x, this.y, 45, 45);
+    }
+  }, {
+    key: "drawTrapezoids",
+    value: function drawTrapezoids(ctx) {
+      var _this2 = this;
+
+      var colors = [GRAY_ONE, GRAY_ONE, GRAY_TWO, GRAY_THREE];
+      TRAPEZOID_POINTS.forEach(function (points, idx) {
+        ctx.fillStyle = colors[idx];
+        ctx.beginPath();
+        ctx.moveTo(_this2.x + points[0][0], _this2.y + points[0][1]);
+        ctx.lineTo(_this2.x + points[1][0], _this2.y + points[1][1]);
+        ctx.lineTo(_this2.x + points[2][0], _this2.y + points[2][1]);
+        ctx.lineTo(_this2.x + points[3][0], _this2.y + points[3][1]);
+        ctx.closePath();
+        ctx.fill();
+      });
+      ctx.fillStyle = this.color;
+      ctx.fillRect(this.x + WIDTH / 2, this.y + WIDTH / 2, WIDTH, WIDTH);
+    }
+  }, {
+    key: "drawTriangles",
+    value: function drawTriangles(ctx) {
+      var _this3 = this;
+
+      var colorParts = this.color.split("(").map(function (part) {
+        return part.split(",");
+      })[1];
+      var red = parseInt(colorParts[0]);
+      var blue = parseInt(colorParts[1]);
+      var green = parseInt(colorParts[2]);
+      var colorLeft = "rgb(".concat(red, ", ").concat(green, ", ").concat(blue, ")");
+      var colorRight = "rgb(".concat(red - 20, ", ").concat(green - 20, ", ").concat(blue - 20, ")");
+      var colorTop = "rgb(".concat(red - 50, ", ").concat(green - 50, ", ").concat(blue - 50, ")");
+      var colorBottom = "rgb(".concat(red - 10, ", ").concat(green - 10, ", ").concat(blue - 10, ")");
+      var colors = [colorLeft, colorRight, colorTop, colorBottom];
+      TRIANGLE_POINTS.forEach(function (triangle, idx) {
+        ctx.fillStyle = colors[idx];
+        ctx.beginPath();
+        ctx.moveTo(_this3.x + triangle[0][0], _this3.y + triangle[0][1]);
+        ctx.lineTo(_this3.x + triangle[1][0], _this3.y + triangle[1][1]);
+        ctx.lineTo(_this3.x + triangle[2][0], _this3.y + triangle[2][1]);
+        ctx.closePath();
+        ctx.fill();
+      });
     }
   }]);
 
@@ -596,6 +703,19 @@ function () {
         sequencer.toggleSquareAtPos(null, null, squareIdx);
       });
     }
+  }, {
+    key: "setStyle",
+    value: function setStyle(event, sequencer) {
+      console.log('IN UTIL');
+      console.log('event', event.target.textContent);
+      var style = event.target.textContent;
+      sequencer.changeStyle(style);
+    }
+  }, {
+    key: "createRandomPreset",
+    value: function createRandomPreset() {// const preset;
+      // preset.instrument = Math.floor(Math.random() * INSTRUMENTS.length)
+    }
   }]);
 
   return Util;
@@ -626,6 +746,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var presets = document.getElementById('presets');
   var plus = document.getElementById('plus');
   var minus = document.getElementById('minus');
+  var styles = document.getElementById('styles');
   canvas.width = 500;
   canvas.height = 500;
   var ctx = canvas.getContext("2d");
@@ -644,6 +765,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   presets.addEventListener('click', function (event) {
     return util.setPreset(event, sequencer);
+  });
+  styles.addEventListener('click', function (event) {
+    return util.setStyle(event, sequencer);
   });
   plus.addEventListener('click', function () {
     var tempoTag = document.getElementById('bpm-display');

@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const presets = document.getElementById('presets')
   const plus = document.getElementById('plus');
   const minus = document.getElementById('minus');
+  const styles = document.getElementById('styles');
 
   canvas.width = 500;
   canvas.height = 500;
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   colors.addEventListener('click', (event) => util.changeColorScheme(event, sequencer));
   presets.addEventListener('click', (event) => util.setPreset(event, sequencer));
-
+  styles.addEventListener('click', (event) => util.setStyle(event, sequencer));
 
   plus.addEventListener('click', () => {
     const tempoTag = document.getElementById('bpm-display');

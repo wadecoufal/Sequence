@@ -58,6 +58,9 @@ class Sequencer {
     this.tempo = 200;
     this.sequencing = this.startSequence();
     this.toggleSquareAtPos = this.toggleSquareAtPos.bind(this);
+
+    this.style = "Square";
+    this.changeStyle = this.changeStyle.bind(this);
   }
 
   startSequence() {
@@ -94,6 +97,11 @@ class Sequencer {
     this.blue = COLOR_SCHEMES[colorScheme].blue;
   }
 
+  changeStyle(style) {
+    console.log('IN SEQUENCER CHANGE STYLE', style);
+    this.style = style;
+  }
+
   triggerSquares(column) {
     const squareIndices = [];
     while (squareIndices.length < 10) {
@@ -104,7 +112,7 @@ class Sequencer {
     const currentColor = `rgb(${this.red.value}, ${this.blue.value}, ${this.green.value})`
     squareIndices.forEach(squareIndex => {
       squareIndex.soundNote(currentColor);
-      squareIndex.draw(this.ctx);
+      squareIndex.draw(this.ctx, this.style);
     })
 
     this.updateCurrentColor();
@@ -163,7 +171,7 @@ class Sequencer {
 
   draw(ctx) {
     this.squares.forEach(square => {
-      square.draw(ctx);
+      square.draw(ctx, this.style);
     });
   }
 
