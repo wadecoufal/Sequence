@@ -143,17 +143,17 @@ var COLOR_SCHEMES = {
   },
   'Muted': {
     'red': {
-      value: 0,
+      value: 50,
       dir: "desc",
       changeVal: 4
     },
     'green': {
-      value: 0,
-      dir: "asc",
+      value: 50,
+      dir: "desc",
       changeVal: 4
     },
     'blue': {
-      value: 0,
+      value: 50,
       dir: "desc",
       changeVal: 4
     }
@@ -388,7 +388,7 @@ function () {
 
       var squareIdx = this.squareIndexAtPos(x, y);
       this.squares[squareIdx].toggle();
-      this.squares[squareIdx].draw(this.ctx);
+      this.squares[squareIdx].draw(this.ctx, this.style);
     }
   }, {
     key: "squareIndexAtPos",

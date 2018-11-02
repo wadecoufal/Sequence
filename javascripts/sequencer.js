@@ -29,9 +29,9 @@ const COLOR_SCHEMES = {
     'blue': { value: 50, dir: "desc", changeVal: 4 }
   },
   'Muted': {
-    'red': { value: 0, dir: "desc", changeVal: 4 },
-    'green': { value: 0, dir: "asc", changeVal: 4 },
-    'blue': { value: 0, dir: "desc", changeVal: 4 }
+    'red': { value: 50, dir: "desc", changeVal: 4 },
+    'green': { value: 50, dir: "desc", changeVal: 4 },
+    'blue': { value: 50, dir: "desc", changeVal: 4 }
   },
   'Blue': {
     'red': { value: 0, dir: "desc", changeVal: 0 },
@@ -208,7 +208,7 @@ class Sequencer {
     const {x, y} = this.getCursorPos(canvas, event);
     const squareIdx = this.squareIndexAtPos(x, y);
     this.squares[squareIdx].toggle();
-    this.squares[squareIdx].draw(this.ctx);
+    this.squares[squareIdx].draw(this.ctx, this.style);
   }
 
   squareIndexAtPos(x, y) {
