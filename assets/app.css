@@ -17,9 +17,16 @@ body {
   font-size: 72px;
   font-weight: 700;
   text-align: center;
+  margin-bottom: 19px;
 }
 
 #colors {
+  list-style: none;
+  height: 300px;
+  width: 250px;
+}
+
+#styles {
   list-style: none;
   height: 300px;
   width: 250px;

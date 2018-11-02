@@ -499,7 +499,6 @@ function () {
   }, {
     key: "draw",
     value: function draw(ctx, style) {
-      console.log("IN DRAW SQUARE", style);
       ctx.clearRect(this.x, this.y, 50, 50);
 
       if (style === 'Jewel') {
@@ -507,22 +506,18 @@ function () {
       } else if (style === 'Square') {
         this.drawSquare(ctx);
       } else if (style === 'Circle') {
+        this.drawCircle(ctx);
+      } else {
         this.drawSquare(ctx);
-      } else if (style === 'Tunnel') {
-        this.drawTrapezoids(ctx);
-      } // switch (style) {
-      //   case "Square":
-      //     this.drawSquare(ctx);
-      //   case "Circle":
-      //     this.drawSquare(ctx);
-      //   case "Jewel":
-      //     this.drawTriangles(ctx);
-      //   case "Tunnel":
-      //     this.drawTrapezoids(ctx);
-      //   default:
-      //     this.drawSquare(ctx);
-      // }
-
+      }
+    }
+  }, {
+    key: "drawCircle",
+    value: function drawCircle(ctx) {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x + TOTAL / 2, this.y + TOTAL / 2, TOTAL / 2, 0, 2 * Math.PI, false);
+      ctx.fill();
     }
   }, {
     key: "drawSquare",
