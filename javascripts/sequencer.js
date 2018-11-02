@@ -59,6 +59,8 @@ class Sequencer {
     this.changeBpm = this.changeBpm.bind(this);
 
     this.tempo = 200;
+    this.tempoMs = 60000 / this.tempo;
+
     this.sequencing = this.startSequence();
     this.toggleSquareAtPos = this.toggleSquareAtPos.bind(this);
 
@@ -70,7 +72,7 @@ class Sequencer {
     return setInterval( () => {
       this.triggerSquares(this.currentColumn);
       this.currentColumn = (this.currentColumn + 1) % 10;
-    }, 292);
+    }, this.tempoMs);
   }
 
   resetSequence() {
@@ -79,7 +81,7 @@ class Sequencer {
     this.sequencing = setInterval(() => {
       this.triggerSquares(this.currentColumn);
       this.currentColumn = (this.currentColumn + 1) % 10;
-    }, this.tempo);
+    }, this.tempoMs);
   }
 
   changeBpm(newTempo, newTextVal) {
@@ -88,10 +90,12 @@ class Sequencer {
     clearInterval(this.sequencing);
     this.currentColumn = 0;
     this.tempo = newTempo;
+    this.tempoMs = 60000 / this.tempo;
+
     this.sequencing = setInterval( () => {
       this.triggerSquares(this.currentColumn);
       this.currentColumn = (this.currentColumn + 1) % 10;
-    }, this.tempo);
+    }, this.tempoMs);
   }
 
   changeColor(colorScheme) {
@@ -216,7 +220,11 @@ class Sequencer {
     square.draw(this.ctx, this.style);
     if (square.toggled) {
       const radius = (square.index / 10 + 10) * 1.5;
-      this.visualizer.addCircle(square.newColor, radius, square.index);
+      this.visualizer.addCircle(
+        square.newColor, 
+        radius, 
+        square.index,
+        this.tempo);
     } else {
       this.visualizer.deleteCircle(square.index);
     }

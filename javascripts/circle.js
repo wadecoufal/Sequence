@@ -1,6 +1,6 @@
 class Circle {
 
-  constructor(x, y, radius, color) {
+  constructor(x, y, radius, color, tempo) {
     this.x = x;
     this.y = y;
     this.radius = radius;
@@ -9,13 +9,10 @@ class Circle {
     this.xDir = 'left';
     this.yDir = 'down';
 
-    this.speed = 4;
+    this.speed = tempo/100;
   }
 
   move() {
-    const randx = Math.floor(Math.random() * 4) + 1;
-    const randy = Math.floor(Math.random() * 4) + 1;
-
     if (this.x > 500) {
       this.xDir = 'left';
     } else if (this.x < 0) {
@@ -29,15 +26,15 @@ class Circle {
     }
 
     if (this.xDir === 'left') {
-      this.x = this.x - this.speed/randx;
+      this.x = this.x - this.speed;
     } else if (this.xDir === 'right') {
-      this.x = this.x + this.speed/randx;
+      this.x = this.x + this.speed;
     }
 
     if (this.yDir === 'up') {
-      this.y = this.y - this.speed/randy;
+      this.y = this.y - this.speed;
     } else if (this.yDir === 'down') {
-      this.y = this.y + this.speed/randy;
+      this.y = this.y + this.speed;
     }
   }
 

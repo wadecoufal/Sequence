@@ -37,18 +37,21 @@ document.addEventListener("DOMContentLoaded", () => {
   plus.addEventListener('click', () => {
     const tempoTag = document.getElementById('bpm-display');
     const currentTempo = parseInt(tempoTag.textContent.split(' ')[0]);
-    const newTempo = Math.floor(60000 / (currentTempo + 5));
+    // const newTempo = Math.floor(60000 / (currentTempo + 5));
     const newTextVal = currentTempo + 5;
 
-    sequencer.changeBpm(newTempo, newTextVal);
+    visualizer.changeSpeed(currentTempo + 5);
+    // sequencer.changeBpm(newTempo, newTextVal);
+    sequencer.changeBpm(currentTempo + 5, newTextVal);
   });
 
   minus.addEventListener("click", () => {
     const tempoTag = document.getElementById("bpm-display");
     const currentTempo = parseInt(tempoTag.textContent.split(" ")[0]);
-    const newTempo = Math.floor(60000 / (currentTempo - 5));
+    // const newTempo = Math.floor(60000 / (currentTempo - 5));
     const newTextVal = currentTempo - 5;
-
-    sequencer.changeBpm(newTempo, newTextVal);
+    visualizer.changeSpeed(currentTempo - 5);
+    // sequencer.changeBpm(newTempo, newTextVal);
+    sequencer.changeBpm(currentTempo - 5, newTextVal);
   });
 });

@@ -7,12 +7,12 @@ class Visualizer {
     this.circles = {};
   }
 
-  addCircle(color, radius, idx) {
+  addCircle(color, radius, idx, tempo) {
     // add circle to circles array
     let circle = new Circle(
       Math.floor(Math.random() * 500), 
       Math.floor(Math.random() * 500),
-      radius, color);
+      radius, color, tempo);
     
     this.circles[idx] = circle;
   }
@@ -40,6 +40,12 @@ class Visualizer {
     }
 
     animateCallback();
+  }
+
+  changeSpeed(newTempo) {
+    Object.values(this.circles).forEach( circle => {
+      circle.speed = newTempo/100;
+    })
   }
 
 

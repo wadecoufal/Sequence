@@ -104,7 +104,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Circle =
 /*#__PURE__*/
 function () {
-  function Circle(x, y, radius, color) {
+  function Circle(x, y, radius, color, tempo) {
     _classCallCheck(this, Circle);
 
     this.x = x;
@@ -113,15 +113,12 @@ function () {
     this.color = color;
     this.xDir = 'left';
     this.yDir = 'down';
-    this.speed = 4;
+    this.speed = tempo / 100;
   }
 
   _createClass(Circle, [{
     key: "move",
     value: function move() {
-      var randx = Math.floor(Math.random() * 4) + 1;
-      var randy = Math.floor(Math.random() * 4) + 1;
-
       if (this.x > 500) {
         this.xDir = 'left';
       } else if (this.x < 0) {
@@ -135,15 +132,15 @@ function () {
       }
 
       if (this.xDir === 'left') {
-        this.x = this.x - this.speed / randx;
+        this.x = this.x - this.speed;
       } else if (this.xDir === 'right') {
-        this.x = this.x + this.speed / randx;
+        this.x = this.x + this.speed;
       }
 
       if (this.yDir === 'up') {
-        this.y = this.y - this.speed / randy;
+        this.y = this.y - this.speed;
       } else if (this.yDir === 'down') {
-        this.y = this.y + this.speed / randy;
+        this.y = this.y + this.speed;
       }
     }
   }, {
@@ -273,6 +270,7 @@ function () {
     this.changeColor = this.changeColor.bind(this);
     this.changeBpm = this.changeBpm.bind(this);
     this.tempo = 200;
+    this.tempoMs = 60000 / this.tempo;
     this.sequencing = this.startSequence();
     this.toggleSquareAtPos = this.toggleSquareAtPos.bind(this);
     this.style = "Square";
@@ -288,7 +286,7 @@ function () {
         _this.triggerSquares(_this.currentColumn);
 
         _this.currentColumn = (_this.currentColumn + 1) % 10;
-      }, 292);
+      }, this.tempoMs);
     }
   }, {
     key: "resetSequence",
@@ -301,7 +299,7 @@ function () {
         _this2.triggerSquares(_this2.currentColumn);
 
         _this2.currentColumn = (_this2.currentColumn + 1) % 10;
-      }, this.tempo);
+      }, this.tempoMs);
     }
   }, {
     key: "changeBpm",
@@ -312,11 +310,12 @@ function () {
       clearInterval(this.sequencing);
       this.currentColumn = 0;
       this.tempo = newTempo;
+      this.tempoMs = 60000 / this.tempo;
       this.sequencing = setInterval(function () {
         _this3.triggerSquares(_this3.currentColumn);
 
         _this3.currentColumn = (_this3.currentColumn + 1) % 10;
-      }, this.tempo);
+      }, this.tempoMs);
     }
   }, {
     key: "changeColor",
@@ -472,7 +471,7 @@ function () {
 
       if (square.toggled) {
         var radius = (square.index / 10 + 10) * 1.5;
-        this.visualizer.addCircle(square.newColor, radius, square.index);
+        this.visualizer.addCircle(square.newColor, radius, square.index, this.tempo);
       } else {
         this.visualizer.deleteCircle(square.index);
       }
@@ -845,9 +844,9 @@ function () {
 
   _createClass(Visualizer, [{
     key: "addCircle",
-    value: function addCircle(color, radius, idx) {
+    value: function addCircle(color, radius, idx, tempo) {
       // add circle to circles array
-      var circle = new _circle_js__WEBPACK_IMPORTED_MODULE_0__["default"](Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), radius, color);
+      var circle = new _circle_js__WEBPACK_IMPORTED_MODULE_0__["default"](Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), radius, color, tempo);
       this.circles[idx] = circle;
     }
   }, {
@@ -880,6 +879,13 @@ function () {
       };
 
       animateCallback();
+    }
+  }, {
+    key: "changeSpeed",
+    value: function changeSpeed(newTempo) {
+      Object.values(this.circles).forEach(function (circle) {
+        circle.speed = newTempo / 100;
+      });
     }
   }]);
 
@@ -943,17 +949,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   plus.addEventListener('click', function () {
     var tempoTag = document.getElementById('bpm-display');
-    var currentTempo = parseInt(tempoTag.textContent.split(' ')[0]);
-    var newTempo = Math.floor(60000 / (currentTempo + 5));
+    var currentTempo = parseInt(tempoTag.textContent.split(' ')[0]); // const newTempo = Math.floor(60000 / (currentTempo + 5));
+
     var newTextVal = currentTempo + 5;
-    sequencer.changeBpm(newTempo, newTextVal);
+    visualizer.changeSpeed(currentTempo + 5); // sequencer.changeBpm(newTempo, newTextVal);
+
+    sequencer.changeBpm(currentTempo + 5, newTextVal);
   });
   minus.addEventListener("click", function () {
     var tempoTag = document.getElementById("bpm-display");
-    var currentTempo = parseInt(tempoTag.textContent.split(" ")[0]);
-    var newTempo = Math.floor(60000 / (currentTempo - 5));
+    var currentTempo = parseInt(tempoTag.textContent.split(" ")[0]); // const newTempo = Math.floor(60000 / (currentTempo - 5));
+
     var newTextVal = currentTempo - 5;
-    sequencer.changeBpm(newTempo, newTextVal);
+    visualizer.changeSpeed(currentTempo - 5); // sequencer.changeBpm(newTempo, newTextVal);
+
+    sequencer.changeBpm(currentTempo - 5, newTextVal);
   });
 });
 
