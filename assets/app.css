@@ -22,14 +22,15 @@ body {
 
 #colors {
   list-style: none;
-  height: 300px;
-  width: 250px;
+  height: 200px;
+  width: 150px;
+  margin-right: 20px;
 }
 
 #styles {
   list-style: none;
-  height: 300px;
-  width: 250px;
+  height: 200px;
+  width: 150px;
 }
 
 .color-list-item {
@@ -51,16 +52,25 @@ body {
   transition: 0.3s;
 }
 
+.options-one {
+  display: flex;
+}
+
+.options-two {
+  display: flex;
+}
+
 #presets {
   list-style: none;
-  height: 300px;
-  width: 250px;
+  height: 200px;
+  width: 150px;
 }
 
 #instruments {
   list-style: none;
-  height: 300px;
-  width: 250px;
+  height: 200px;
+  width: 150px;
+  margin-right: 20px;
 }
 
 .instrument-list-item {
@@ -85,6 +95,12 @@ body {
 #canvas {
   width: 500px;
   height: 500px;
+}
+
+#canvas2 {
+  width: 500px;
+  height: 500px;
+  border: 1px solid darkgray;
 }
 
 .bpm {

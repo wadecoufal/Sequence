@@ -86,6 +86,83 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./javascripts/circle.js":
+/*!*******************************!*\
+  !*** ./javascripts/circle.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Circle =
+/*#__PURE__*/
+function () {
+  function Circle(x, y, radius, color) {
+    _classCallCheck(this, Circle);
+
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.color = color;
+    this.xDir = 'left';
+    this.yDir = 'down';
+    this.speed = 4;
+  }
+
+  _createClass(Circle, [{
+    key: "move",
+    value: function move() {
+      var randx = Math.floor(Math.random() * 4) + 1;
+      var randy = Math.floor(Math.random() * 4) + 1;
+
+      if (this.x > 500) {
+        this.xDir = 'left';
+      } else if (this.x < 0) {
+        this.xDir = 'right';
+      }
+
+      if (this.y > 500) {
+        this.yDir = "up";
+      } else if (this.x < 0) {
+        this.yDir = "down";
+      }
+
+      if (this.xDir === 'left') {
+        this.x = this.x - this.speed / randx;
+      } else if (this.xDir === 'right') {
+        this.x = this.x + this.speed / randx;
+      }
+
+      if (this.yDir === 'up') {
+        this.y = this.y - this.speed / randy;
+      } else if (this.yDir === 'down') {
+        this.y = this.y + this.speed / randy;
+      }
+    }
+  }, {
+    key: "draw",
+    value: function draw(ctx) {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+      ctx.fill();
+    }
+  }]);
+
+  return Circle;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Circle);
+
+/***/ }),
+
 /***/ "./javascripts/sequencer.js":
 /*!**********************************!*\
   !*** ./javascripts/sequencer.js ***!
@@ -180,7 +257,7 @@ var COLOR_SCHEMES = {
 var Sequencer =
 /*#__PURE__*/
 function () {
-  function Sequencer(ctx) {
+  function Sequencer(ctx, visualizer) {
     _classCallCheck(this, Sequencer);
 
     this.squares = [];
@@ -188,6 +265,8 @@ function () {
     this.ctx = ctx;
     this.currentColumn = 0;
     this.currentColorIdx = 0;
+    this.visualizer = visualizer;
+    this.visualizer.start();
     this.red = COLOR_SCHEMES['Colorful']['red'];
     this.blue = COLOR_SCHEMES["Colorful"]["blue"];
     this.green = COLOR_SCHEMES["Colorful"]["green"];
@@ -266,7 +345,7 @@ function () {
 
       var currentColor = "rgb(".concat(this.red.value, ", ").concat(this.blue.value, ", ").concat(this.green.value, ")");
       squareIndices.forEach(function (squareIndex) {
-        squareIndex.soundNote(currentColor);
+        squareIndex.soundNote(currentColor, _this4.ctx);
         squareIndex.draw(_this4.ctx, _this4.style);
       });
       this.updateCurrentColor();
@@ -387,8 +466,16 @@ function () {
           y = _this$getCursorPos.y;
 
       var squareIdx = this.squareIndexAtPos(x, y);
-      this.squares[squareIdx].toggle();
-      this.squares[squareIdx].draw(this.ctx, this.style);
+      var square = this.squares[squareIdx];
+      square.toggle();
+      square.draw(this.ctx, this.style);
+
+      if (square.toggled) {
+        var radius = (square.index / 10 + 10) * 1.5;
+        this.visualizer.addCircle(square.newColor, radius, square.index);
+      } else {
+        this.visualizer.deleteCircle(square.index);
+      }
     }
   }, {
     key: "squareIndexAtPos",
@@ -470,7 +557,7 @@ function () {
 
   _createClass(Square, [{
     key: "soundNote",
-    value: function soundNote(nextColor) {
+    value: function soundNote(nextColor, ctx) {
       var _this = this;
 
       this.newColor = nextColor;
@@ -479,11 +566,19 @@ function () {
         setTimeout(function () {
           _this.audio.currentTime = 0;
 
-          _this.audio.play();
+          _this.audio.play(); // this.radiate(ctx);
+
         }, 0);
       } else {
         this.color = nextColor;
       }
+    }
+  }, {
+    key: "radiate",
+    value: function radiate(ctx) {
+      ctx.fillStyle = this.color;
+      ctx.globalAlpha = 0.5;
+      ctx.fillRect(this.x - 25, this.y - 25, 95, 95);
     }
   }, {
     key: "toggle",
@@ -720,6 +815,81 @@ function () {
 
 /***/ }),
 
+/***/ "./javascripts/visualizer.js":
+/*!***********************************!*\
+  !*** ./javascripts/visualizer.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _circle_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./circle.js */ "./javascripts/circle.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var Visualizer =
+/*#__PURE__*/
+function () {
+  function Visualizer(ctx2) {
+    _classCallCheck(this, Visualizer);
+
+    this.ctx = ctx2;
+    this.circles = {};
+  }
+
+  _createClass(Visualizer, [{
+    key: "addCircle",
+    value: function addCircle(color, radius, idx) {
+      // add circle to circles array
+      var circle = new _circle_js__WEBPACK_IMPORTED_MODULE_0__["default"](Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), radius, color);
+      this.circles[idx] = circle;
+    }
+  }, {
+    key: "deleteCircle",
+    value: function deleteCircle(idx) {
+      delete this.circles[idx];
+    }
+  }, {
+    key: "moveCircles",
+    value: function moveCircles() {
+      Object.values(this.circles).forEach(function (circle) {
+        circle.move();
+      });
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      var _this = this;
+
+      var animateCallback = function animateCallback() {
+        _this.ctx.clearRect(0, 0, 500, 500);
+
+        Object.values(_this.circles).forEach(function (circle) {
+          circle.draw(_this.ctx);
+        });
+
+        _this.moveCircles();
+
+        requestAnimationFrame(animateCallback);
+      };
+
+      animateCallback();
+    }
+  }]);
+
+  return Visualizer;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Visualizer);
+
+/***/ }),
+
 /***/ "./sequence.js":
 /*!*********************!*\
   !*** ./sequence.js ***!
@@ -730,12 +900,15 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./javascripts/sequencer.js */ "./javascripts/sequencer.js");
-/* harmony import */ var _javascripts_util_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./javascripts/util.js */ "./javascripts/util.js");
+/* harmony import */ var _javascripts_visualizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./javascripts/visualizer.js */ "./javascripts/visualizer.js");
+/* harmony import */ var _javascripts_util_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./javascripts/util.js */ "./javascripts/util.js");
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log('111');
   var canvas = document.getElementById("canvas");
+  var canvas2 = document.getElementById("canvas2");
   var colors = document.getElementById('colors');
   var instruments = document.getElementById('instruments');
   var presets = document.getElementById('presets');
@@ -744,9 +917,13 @@ document.addEventListener("DOMContentLoaded", function () {
   var styles = document.getElementById('styles');
   canvas.width = 500;
   canvas.height = 500;
+  canvas2.width = 500;
+  canvas2.height = 500;
   var ctx = canvas.getContext("2d");
-  var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
-  var util = new _javascripts_util_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  var ctx2 = canvas2.getContext("2d");
+  var visualizer = new _javascripts_visualizer_js__WEBPACK_IMPORTED_MODULE_1__["default"](ctx2);
+  var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, visualizer);
+  var util = new _javascripts_util_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
   sequencer.draw(ctx);
   canvas.addEventListener('click', function (event) {
     return sequencer.toggleSquareAtPos(canvas, event);

@@ -58,16 +58,23 @@ class Square {
     document.body.appendChild(this.audio);
   }
 
-  soundNote(nextColor) {
+  soundNote(nextColor, ctx) {
     this.newColor = nextColor;
     if (this.toggled) {
       setTimeout(() => {
         this.audio.currentTime = 0;
         this.audio.play();
+        // this.radiate(ctx);
       }, 0);
     } else {
       this.color = nextColor;
     }
+  }
+
+  radiate(ctx) {
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = 0.5;
+    ctx.fillRect(this.x - 25, this.y - 25, 95, 95);
   }
 
   toggle() {

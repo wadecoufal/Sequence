@@ -1,9 +1,11 @@
 import Sequencer from './javascripts/sequencer.js';
+import Visualizer from './javascripts/visualizer.js';
 import Util from './javascripts/util.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log('111');
   const canvas = document.getElementById("canvas");
+  const canvas2 = document.getElementById("canvas2");
   const colors = document.getElementById('colors');
   const instruments = document.getElementById('instruments');
   const presets = document.getElementById('presets')
@@ -13,9 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   canvas.width = 500;
   canvas.height = 500;
+  canvas2.width = 500;
+  canvas2.height = 500;
 
   const ctx = canvas.getContext("2d");
-  const sequencer = new Sequencer(ctx);
+  const ctx2 = canvas2.getContext("2d");
+  const visualizer = new Visualizer(ctx2);
+  const sequencer = new Sequencer(ctx, visualizer);
   const util = new Util();
   sequencer.draw(ctx);
  

@@ -41,12 +41,15 @@ const COLOR_SCHEMES = {
 };
 
 class Sequencer {
-  constructor(ctx) {
+  constructor(ctx, visualizer) {
     this.squares = [];
     this.addSquares();
     this.ctx = ctx;
     this.currentColumn = 0;
     this.currentColorIdx = 0;
+
+    this.visualizer = visualizer;
+    this.visualizer.start();
 
     this.red = COLOR_SCHEMES['Colorful']['red'];
     this.blue = COLOR_SCHEMES["Colorful"]["blue"];
@@ -111,7 +114,7 @@ class Sequencer {
 
     const currentColor = `rgb(${this.red.value}, ${this.blue.value}, ${this.green.value})`
     squareIndices.forEach(squareIndex => {
-      squareIndex.soundNote(currentColor);
+      squareIndex.soundNote(currentColor, this.ctx);
       squareIndex.draw(this.ctx, this.style);
     })
 
@@ -207,8 +210,16 @@ class Sequencer {
 
     const {x, y} = this.getCursorPos(canvas, event);
     const squareIdx = this.squareIndexAtPos(x, y);
-    this.squares[squareIdx].toggle();
-    this.squares[squareIdx].draw(this.ctx, this.style);
+    const square = this.squares[squareIdx];
+
+    square.toggle();
+    square.draw(this.ctx, this.style);
+    if (square.toggled) {
+      const radius = (square.index / 10 + 10) * 1.5;
+      this.visualizer.addCircle(square.newColor, radius, square.index);
+    } else {
+      this.visualizer.deleteCircle(square.index);
+    }
   }
 
   squareIndexAtPos(x, y) {

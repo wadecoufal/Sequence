@@ -8,17 +8,32 @@
 
   <body>
     <div class="sidebar-one">
-      <ul id="colors">
-        <li class="color-list-item">Colorful</li>
-        <li class="color-list-item">Muted</li>
-        <li class="color-list-item">Blue</li>
-      </ul>
-
-      <ul id="presets" class="colors">
-        <li class="color-list-item">Preset 1</li>
-        <li class="color-list-item">Preset 2</li>
-        <li class="color-list-item">Preset 3</li>
-      </ul>
+      <div class="options-one">
+        <ul id="colors">
+          <li class="color-list-item">Colorful</li>
+          <li class="color-list-item">Muted</li>
+          <li class="color-list-item">Blue</li>
+        </ul>
+        
+        <ul id="presets" class="colors">
+          <li class="color-list-item">Preset 1</li>
+          <li class="color-list-item">Preset 2</li>
+          <li class="color-list-item">Preset 3</li>
+        </ul>
+      </div>
+      
+      <div class="options-two">
+        <ul id="instruments">
+          <li class="instrument-list-item">Marimba</li>
+          <li class="instrument-list-item">Xylo</li>
+        </ul>
+        
+        <ul id="styles" class="colors">
+          <li class="color-list-item">Square</li>
+          <li class="color-list-item">Circle</li>
+          <li class="color-list-item">Jewel</li>
+        </ul>
+      </div>
     </div>
     
 
@@ -32,19 +47,14 @@
       </div>
     </div>
 
-    <div class="sidebar-two">
-      <ul id="instruments">
-        <li class="instrument-list-item">Marimba</li>
-        <li class="instrument-list-item">Glockenspiel</li>
-      </ul>
-
-      <ul id="styles" class="colors">
-        <li class="color-list-item">Square</li>
-        <li class="color-list-item">Circle</li>
-        <li class="color-list-item">Jewel</li>
-      </ul>
-
+    <div class="circles">
+      <canvas id="canvas2"></canvas>
     </div>
+
+    <!-- <div class="sidebar-two">
+      
+
+    </div> -->
     
   
     <script type="application/javascript" src="javascripts/bundle.js"></script>
