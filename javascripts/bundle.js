@@ -197,6 +197,18 @@ var MARIMBA = {
   2: "./assets/sound_files/marimba/mar_c5.wav",
   1: "./assets/sound_files/marimba/mar_e5.wav"
 };
+var PIANO_ONE = {
+  0: "./assets/sound_files/piano/C2.wav",
+  1: "./assets/sound_files/piano/C3.wav",
+  2: "./assets/sound_files/piano/C4.wav",
+  3: "./assets/sound_files/piano/C5.wav",
+  4: "./assets/sound_files/piano/C6.wav",
+  5: "./assets/sound_files/piano/C7.wav",
+  6: "./assets/sound_files/piano/D1.wav",
+  7: "./assets/sound_files/piano/D2.wav",
+  8: "./assets/sound_files/piano/D3.wav",
+  9: "./assets/sound_files/piano/F2.wav"
+};
 var COLOR_SCHEMES = {
   'Colorful': {
     'red': {
@@ -393,7 +405,7 @@ function () {
         // const audio = this.createAudioTag(MARIMBA[row]);
         for (var j = 0; j < 10; j++) {
           var newSquareIndex = this.squares.length;
-          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, MARIMBA[row], newSquareIndex));
+          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, PIANO_ONE[row], newSquareIndex));
           x += 50;
         }
 
@@ -470,10 +482,14 @@ function () {
       square.draw(this.ctx, this.style);
 
       if (square.toggled) {
-        var radius = (square.index / 10 + 10) * 1.5;
-        this.visualizer.addCircle(square.newColor, radius, square.index, this.tempo);
-      } else {
-        this.visualizer.deleteCircle(square.index);
+        var radius = (square.index / 10 + 10) * 1.5; // this.visualizer.addCircle(
+        //   square.newColor, 
+        //   radius, 
+        //   square.index,
+        //   this.tempo);
+
+        this.visualizer.addSquare(0, 0, radius, square.newColor);
+      } else {// this.visualizer.deleteCircle(square.index);
       }
     }
   }, {
@@ -673,6 +689,57 @@ function () {
 
 /***/ }),
 
+/***/ "./javascripts/squares.js":
+/*!********************************!*\
+  !*** ./javascripts/squares.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Square =
+/*#__PURE__*/
+function () {
+  function Square(x, y, width, color, idx) {
+    _classCallCheck(this, Square);
+
+    this.x = Math.floor(Math.random() * 500 + 1);
+    this.y = 0;
+    this.idx = idx;
+    this.width = width;
+    this.color = color;
+    this.acc = 1.05;
+    this.velocity = 2;
+  }
+
+  _createClass(Square, [{
+    key: "move",
+    value: function move() {
+      this.y += this.velocity;
+      this.velocity *= this.acc;
+    }
+  }, {
+    key: "draw",
+    value: function draw(ctx) {
+      ctx.fillStyle = this.color;
+      ctx.fillRect(this.x, this.y, this.width, this.width);
+    }
+  }]);
+
+  return Square;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Square);
+
+/***/ }),
+
 /***/ "./javascripts/util.js":
 /*!*****************************!*\
   !*** ./javascripts/util.js ***!
@@ -824,11 +891,13 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _circle_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./circle.js */ "./javascripts/circle.js");
+/* harmony import */ var _squares_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./squares.js */ "./javascripts/squares.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -840,12 +909,19 @@ function () {
 
     this.ctx = ctx2;
     this.circles = {};
+    this.squares = {};
+    this.type = 'square';
   }
 
   _createClass(Visualizer, [{
+    key: "addSquare",
+    value: function addSquare(x, y, width, color) {
+      var square = new _squares_js__WEBPACK_IMPORTED_MODULE_1__["default"](x, y, width, color);
+      this.squares[this.squares.length] = square;
+    }
+  }, {
     key: "addCircle",
     value: function addCircle(color, radius, idx, tempo) {
-      // add circle to circles array
       var circle = new _circle_js__WEBPACK_IMPORTED_MODULE_0__["default"](Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), radius, color, tempo);
       this.circles[idx] = circle;
     }
@@ -853,6 +929,7 @@ function () {
     key: "deleteCircle",
     value: function deleteCircle(idx) {
       delete this.circles[idx];
+      console.log(this.circles);
     }
   }, {
     key: "moveCircles",
@@ -862,23 +939,57 @@ function () {
       });
     }
   }, {
-    key: "start",
-    value: function start() {
+    key: "moveSquares",
+    value: function moveSquares() {
       var _this = this;
 
+      Object.values(this.squares).forEach(function (square, idx) {
+        square.move();
+
+        if (square.y > 550 || square.x > 550) {
+          delete _this.squares[square];
+          console.log(_this.squares);
+        }
+      });
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      var _this2 = this;
+
       var animateCallback = function animateCallback() {
-        _this.ctx.clearRect(0, 0, 500, 500);
+        _this2.ctx.clearRect(0, 0, 500, 500);
 
-        Object.values(_this.circles).forEach(function (circle) {
-          circle.draw(_this.ctx);
-        });
-
-        _this.moveCircles();
+        if (_this2.type === 'square') {
+          _this2.renderSquares();
+        } else if (_this2.type === 'circle') {
+          _this2.renderCircles();
+        }
 
         requestAnimationFrame(animateCallback);
       };
 
       animateCallback();
+    }
+  }, {
+    key: "renderCircles",
+    value: function renderCircles() {
+      var _this3 = this;
+
+      Object.values(this.circles).forEach(function (circle) {
+        circle.draw(_this3.ctx);
+      });
+      this.moveCircles();
+    }
+  }, {
+    key: "renderSquares",
+    value: function renderSquares() {
+      var _this4 = this;
+
+      Object.values(this.squares).forEach(function (square) {
+        square.draw(_this4.ctx);
+      });
+      this.moveSquares();
     }
   }, {
     key: "changeSpeed",

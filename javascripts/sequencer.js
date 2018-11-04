@@ -22,6 +22,19 @@ const MARIMBA = {
   1: "./assets/sound_files/marimba/mar_e5.wav"
 }
 
+const PIANO_ONE = {
+  0: "./assets/sound_files/piano/C2.wav",
+  1: "./assets/sound_files/piano/C3.wav",
+  2: "./assets/sound_files/piano/C4.wav",
+  3: "./assets/sound_files/piano/C5.wav",
+  4: "./assets/sound_files/piano/C6.wav",
+  5: "./assets/sound_files/piano/C7.wav",
+  6: "./assets/sound_files/piano/D1.wav",
+  7: "./assets/sound_files/piano/D2.wav",
+  8: "./assets/sound_files/piano/D3.wav",
+  9: "./assets/sound_files/piano/F2.wav",
+}
+
 const COLOR_SCHEMES = {
   'Colorful': {
     'red': { value: 150, dir: "desc", changeVal: 4 },
@@ -159,7 +172,7 @@ class Sequencer {
 
       for (let j = 0; j < 10; j++) {
         let newSquareIndex = this.squares.length;
-        this.squares.push(new Square(x, y, MARIMBA[row], newSquareIndex));
+        this.squares.push(new Square(x, y, PIANO_ONE[row], newSquareIndex));
         x += 50;
       }
       x = 0;
@@ -220,13 +233,15 @@ class Sequencer {
     square.draw(this.ctx, this.style);
     if (square.toggled) {
       const radius = (square.index / 10 + 10) * 1.5;
-      this.visualizer.addCircle(
-        square.newColor, 
-        radius, 
-        square.index,
-        this.tempo);
+      // this.visualizer.addCircle(
+      //   square.newColor, 
+      //   radius, 
+      //   square.index,
+      //   this.tempo);
+
+      this.visualizer.addSquare(0, 0, radius, square.newColor);
     } else {
-      this.visualizer.deleteCircle(square.index);
+      // this.visualizer.deleteCircle(square.index);
     }
   }
 
