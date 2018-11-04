@@ -1,39 +1,5 @@
 import Square from './square.js';
-
-// const COLORS = [
-//   "#ff70b2",
-//   "#ff6394",
-//   "#ff4f75",
-//   "#ff3a4b",
-//   "#ff2134",
-//   "#e5091c"
-// ];
-
-const MARIMBA = {
-  6: "./assets/sound_files/marimba/mar_b3.wav",
-  9: "./assets/sound_files/marimba/mar_c3.wav",
-  8: "./assets/sound_files/marimba/mar_e3.wav",
-  7: "./assets/sound_files/marimba/mar_g3.wav",
-  3: "./assets/sound_files/marimba/mar_a4.wav",
-  5: "./assets/sound_files/marimba/mar_d4.wav",
-  4: "./assets/sound_files/marimba/mar_f4.wav",
-  0: "./assets/sound_files/marimba/mar_b5.wav",
-  2: "./assets/sound_files/marimba/mar_c5.wav",
-  1: "./assets/sound_files/marimba/mar_e5.wav"
-}
-
-const PIANO_ONE = {
-  0: "./assets/sound_files/piano/C2.wav",
-  1: "./assets/sound_files/piano/C3.wav",
-  2: "./assets/sound_files/piano/C4.wav",
-  3: "./assets/sound_files/piano/C5.wav",
-  4: "./assets/sound_files/piano/C6.wav",
-  5: "./assets/sound_files/piano/C7.wav",
-  6: "./assets/sound_files/piano/D1.wav",
-  7: "./assets/sound_files/piano/D2.wav",
-  8: "./assets/sound_files/piano/D3.wav",
-  9: "./assets/sound_files/piano/F2.wav",
-}
+import { PIANO } from './piano_filepaths.js';
 
 const COLOR_SCHEMES = {
   'Colorful': {
@@ -61,9 +27,6 @@ class Sequencer {
     this.currentColumn = 0;
     this.currentColorIdx = 0;
 
-    this.visualizer = visualizer;
-    this.visualizer.start();
-
     this.red = COLOR_SCHEMES['Colorful']['red'];
     this.blue = COLOR_SCHEMES["Colorful"]["blue"];
     this.green = COLOR_SCHEMES["Colorful"]["green"];
@@ -84,7 +47,7 @@ class Sequencer {
   startSequence() {
     return setInterval( () => {
       this.triggerSquares(this.currentColumn);
-      this.currentColumn = (this.currentColumn + 1) % 10;
+      this.currentColumn = (this.currentColumn + 1) % 20;
     }, this.tempoMs);
   }
 
@@ -93,7 +56,7 @@ class Sequencer {
     this.currentColumn = 0;
     this.sequencing = setInterval(() => {
       this.triggerSquares(this.currentColumn);
-      this.currentColumn = (this.currentColumn + 1) % 10;
+      this.currentColumn = (this.currentColumn + 1) % 20;
     }, this.tempoMs);
   }
 
@@ -107,7 +70,7 @@ class Sequencer {
 
     this.sequencing = setInterval( () => {
       this.triggerSquares(this.currentColumn);
-      this.currentColumn = (this.currentColumn + 1) % 10;
+      this.currentColumn = (this.currentColumn + 1) % 20;
     }, this.tempoMs);
   }
 
@@ -126,7 +89,7 @@ class Sequencer {
     const squareIndices = [];
     while (squareIndices.length < 10) {
       squareIndices.push(this.squares[column]);
-      column += 10;
+      column += 20;
     }
 
     const currentColor = `rgb(${this.red.value}, ${this.blue.value}, ${this.green.value})`
@@ -167,12 +130,14 @@ class Sequencer {
     let y = 0;
     let row = 0;
     for (let i = 0; i < 10; i++) {
-      // create audio here and apply to all j squares
-      // const audio = this.createAudioTag(MARIMBA[row]);
-
-      for (let j = 0; j < 10; j++) {
+      for (let j = 0; j < 20; j++) {
         let newSquareIndex = this.squares.length;
-        this.squares.push(new Square(x, y, PIANO_ONE[row], newSquareIndex));
+        this.squares.push(new Square(
+          x, 
+          y, 
+          PIANO[1][row].filePath, 
+          PIANO[1][row].idx,
+          newSquareIndex));
         x += 50;
       }
       x = 0;
@@ -231,23 +196,11 @@ class Sequencer {
 
     square.toggle();
     square.draw(this.ctx, this.style);
-    if (square.toggled) {
-      const radius = (square.index / 10 + 10) * 1.5;
-      // this.visualizer.addCircle(
-      //   square.newColor, 
-      //   radius, 
-      //   square.index,
-      //   this.tempo);
-
-      this.visualizer.addSquare(0, 0, radius, square.newColor);
-    } else {
-      // this.visualizer.deleteCircle(square.index);
-    }
   }
 
   squareIndexAtPos(x, y) {
     const xIdx = Math.floor(x / 50);
-    const yIdx = Math.floor(y / 50) * 10;
+    const yIdx = Math.floor(y / 50) * 20;
     return xIdx + yIdx;
   }
 

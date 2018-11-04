@@ -160,6 +160,353 @@ function () {
 
 /***/ }),
 
+/***/ "./javascripts/piano_filepaths.js":
+/*!****************************************!*\
+  !*** ./javascripts/piano_filepaths.js ***!
+  \****************************************/
+/*! exports provided: PIANO */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PIANO", function() { return PIANO; });
+var PIANO = {
+  0: {
+    0: {
+      filePath: "./assets/sound_files/piano/C1.wav",
+      idx: 0
+    },
+    1: {
+      filePath: "./assets/sound_files/piano/D1.wav",
+      idx: 2
+    },
+    2: {
+      filePath: "./assets/sound_files/piano/E1.wav",
+      idx: 4
+    },
+    3: {
+      filePath: "./assets/sound_files/piano/F1.wav",
+      idx: 5
+    },
+    4: {
+      filePath: "./assets/sound_files/piano/G1.wav",
+      idx: 7
+    },
+    5: {
+      filePath: "./assets/sound_files/piano/A1.wav",
+      idx: 9
+    },
+    6: {
+      filePath: "./assets/sound_files/piano/B1.wav",
+      idx: 11
+    },
+    7: {
+      filePath: "./assets/sound_files/piano/C2.wav",
+      idx: 12
+    },
+    8: {
+      filePath: "./assets/sound_files/piano/D2.wav",
+      idx: 14
+    },
+    9: {
+      filePath: "./assets/sound_files/piano/E2.wav",
+      idx: 16
+    }
+  },
+  1: {
+    0: {
+      filePath: "./assets/sound_files/piano/C2.wav",
+      idx: 12
+    },
+    1: {
+      filePath: "./assets/sound_files/piano/D2.wav",
+      idx: 14
+    },
+    2: {
+      filePath: "./assets/sound_files/piano/E2.wav",
+      idx: 16
+    },
+    3: {
+      filePath: "./assets/sound_files/piano/F2.wav",
+      idx: 17
+    },
+    4: {
+      filePath: "./assets/sound_files/piano/G2.wav",
+      idx: 19
+    },
+    5: {
+      filePath: "./assets/sound_files/piano/A2.wav",
+      idx: 21
+    },
+    6: {
+      filePath: "./assets/sound_files/piano/B2.wav",
+      idx: 23
+    },
+    7: {
+      filePath: "./assets/sound_files/piano/C3.wav",
+      idx: 24
+    },
+    8: {
+      filePath: "./assets/sound_files/piano/D3.wav",
+      idx: 26
+    },
+    9: {
+      filePath: "./assets/sound_files/piano/E3.wav",
+      idx: 28
+    }
+  },
+  2: {
+    0: {
+      filePath: "./assets/sound_files/piano/C3.wav",
+      idx: 24
+    },
+    1: {
+      filePath: "./assets/sound_files/piano/D3.wav",
+      idx: 26
+    },
+    2: {
+      filePath: "./assets/sound_files/piano/E3.wav",
+      idx: 28
+    },
+    3: {
+      filePath: "./assets/sound_files/piano/F3.wav",
+      idx: 29
+    },
+    4: {
+      filePath: "./assets/sound_files/piano/G3.wav",
+      idx: 31
+    },
+    5: {
+      filePath: "./assets/sound_files/piano/A3.wav",
+      idx: 33
+    },
+    6: {
+      filePath: "./assets/sound_files/piano/B3.wav",
+      idx: 35
+    },
+    7: {
+      filePath: "./assets/sound_files/piano/C4.wav",
+      idx: 36
+    },
+    8: {
+      filePath: "./assets/sound_files/piano/D4.wav",
+      idx: 38
+    },
+    9: {
+      filePath: "./assets/sound_files/piano/E4.wav",
+      idx: 40
+    }
+  },
+  3: {
+    0: {
+      filePath: "./assets/sound_files/piano/C4.wav",
+      idx: 36
+    },
+    1: {
+      filePath: "./assets/sound_files/piano/D4.wav",
+      idx: 38
+    },
+    2: {
+      filePath: "./assets/sound_files/piano/E4.wav",
+      idx: 40
+    },
+    3: {
+      filePath: "./assets/sound_files/piano/F4.wav",
+      idx: 41
+    },
+    4: {
+      filePath: "./assets/sound_files/piano/G4.wav",
+      idx: 43
+    },
+    5: {
+      filePath: "./assets/sound_files/piano/A4.wav",
+      idx: 45
+    },
+    6: {
+      filePath: "./assets/sound_files/piano/B4.wav",
+      idx: 47
+    },
+    7: {
+      filePath: "./assets/sound_files/piano/C5.wav",
+      idx: 48
+    },
+    8: {
+      filePath: "./assets/sound_files/piano/D5.wav",
+      idx: 50
+    },
+    9: {
+      filePath: "./assets/sound_files/piano/E5.wav",
+      idx: 52
+    }
+  },
+  4: {
+    0: {
+      filePath: "./assets/sound_files/piano/C5.wav",
+      idx: 48
+    },
+    1: {
+      filePath: "./assets/sound_files/piano/D5.wav",
+      idx: 50
+    },
+    2: {
+      filePath: "./assets/sound_files/piano/E5.wav",
+      idx: 52
+    },
+    3: {
+      filePath: "./assets/sound_files/piano/F5.wav",
+      idx: 53
+    },
+    4: {
+      filePath: "./assets/sound_files/piano/G5.wav",
+      idx: 55
+    },
+    5: {
+      filePath: "./assets/sound_files/piano/A5.wav",
+      idx: 57
+    },
+    6: {
+      filePath: "./assets/sound_files/piano/B5.wav",
+      idx: 59
+    },
+    7: {
+      filePath: "./assets/sound_files/piano/C6.wav",
+      idx: 60
+    },
+    8: {
+      filePath: "./assets/sound_files/piano/D6.wav",
+      idx: 62
+    },
+    9: {
+      filePath: "./assets/sound_files/piano/E6.wav",
+      idx: 64
+    }
+  },
+  5: {
+    0: {
+      filePath: "./assets/sound_files/piano/C6.wav",
+      idx: 60
+    },
+    1: {
+      filePath: "./assets/sound_files/piano/D6.wav",
+      idx: 62
+    },
+    2: {
+      filePath: "./assets/sound_files/piano/E6.wav",
+      idx: 64
+    },
+    3: {
+      filePath: "./assets/sound_files/piano/F6.wav",
+      idx: 65
+    },
+    4: {
+      filePath: "./assets/sound_files/piano/G6.wav",
+      idx: 67
+    },
+    5: {
+      filePath: "./assets/sound_files/piano/A6.wav",
+      idx: 69
+    },
+    6: {
+      filePath: "./assets/sound_files/piano/B6.wav",
+      idx: 71
+    },
+    7: {
+      filePath: "./assets/sound_files/piano/C7.wav",
+      idx: 72
+    },
+    8: {
+      filePath: "./assets/sound_files/piano/D7.wav",
+      idx: 74
+    },
+    9: {
+      filePath: "./assets/sound_files/piano/E7.wav",
+      idx: 76
+    }
+  }
+};
+var PIANO_PATHS = {
+  0: "./assets/sound_files/piano/C1.wav",
+  1: "./assets/sound_files/piano/DB1.wav",
+  2: "./assets/sound_files/piano/D1.wav",
+  3: "./assets/sound_files/piano/EB1.wav",
+  4: "./assets/sound_files/piano/E1.wav",
+  5: "./assets/sound_files/piano/F1.wav",
+  6: "./assets/sound_files/piano/GB1.wav",
+  7: "./assets/sound_files/piano/G1.wav",
+  8: "./assets/sound_files/piano/AB1.wav",
+  9: "./assets/sound_files/piano/A1.wav",
+  10: "./assets/sound_files/piano/BB1.wav",
+  11: "./assets/sound_files/piano/B1.wav",
+  12: "./assets/sound_files/piano/C2.wav",
+  13: "./assets/sound_files/piano/DB2.wav",
+  14: "./assets/sound_files/piano/D2.wav",
+  15: "./assets/sound_files/piano/EB2.wav",
+  16: "./assets/sound_files/piano/E2.wav",
+  17: "./assets/sound_files/piano/F2.wav",
+  18: "./assets/sound_files/piano/GB2.wav",
+  19: "./assets/sound_files/piano/G2.wav",
+  20: "./assets/sound_files/piano/AB2.wav",
+  21: "./assets/sound_files/piano/A2.wav",
+  22: "./assets/sound_files/piano/BB2.wav",
+  23: "./assets/sound_files/piano/B2.wav",
+  24: "./assets/sound_files/piano/C3.wav",
+  25: "./assets/sound_files/piano/DB3.wav",
+  26: "./assets/sound_files/piano/D3.wav",
+  27: "./assets/sound_files/piano/EB3.wav",
+  28: "./assets/sound_files/piano/E3.wav",
+  29: "./assets/sound_files/piano/F3.wav",
+  30: "./assets/sound_files/piano/GB3.wav",
+  31: "./assets/sound_files/piano/G3.wav",
+  32: "./assets/sound_files/piano/AB3.wav",
+  33: "./assets/sound_files/piano/A3.wav",
+  34: "./assets/sound_files/piano/BB3.wav",
+  35: "./assets/sound_files/piano/B3.wav",
+  36: "./assets/sound_files/piano/C4.wav",
+  37: "./assets/sound_files/piano/DB4.wav",
+  38: "./assets/sound_files/piano/D4.wav",
+  39: "./assets/sound_files/piano/EB4.wav",
+  40: "./assets/sound_files/piano/E4.wav",
+  41: "./assets/sound_files/piano/F4.wav",
+  42: "./assets/sound_files/piano/GB4.wav",
+  43: "./assets/sound_files/piano/G4.wav",
+  44: "./assets/sound_files/piano/AB4.wav",
+  45: "./assets/sound_files/piano/A4.wav",
+  46: "./assets/sound_files/piano/BB4.wav",
+  47: "./assets/sound_files/piano/B4.wav",
+  48: "./assets/sound_files/piano/C5.wav",
+  49: "./assets/sound_files/piano/DB5.wav",
+  50: "./assets/sound_files/piano/D5.wav",
+  51: "./assets/sound_files/piano/EB5.wav",
+  52: "./assets/sound_files/piano/E5.wav",
+  53: "./assets/sound_files/piano/F5.wav",
+  54: "./assets/sound_files/piano/GB5.wav",
+  55: "./assets/sound_files/piano/G5.wav",
+  56: "./assets/sound_files/piano/AB5.wav",
+  57: "./assets/sound_files/piano/A5.wav",
+  58: "./assets/sound_files/piano/BB5.wav",
+  59: "./assets/sound_files/piano/B5.wav",
+  60: "./assets/sound_files/piano/C6.wav",
+  61: "./assets/sound_files/piano/DB6.wav",
+  62: "./assets/sound_files/piano/D6.wav",
+  63: "./assets/sound_files/piano/EB6.wav",
+  64: "./assets/sound_files/piano/E6.wav",
+  65: "./assets/sound_files/piano/F6.wav",
+  66: "./assets/sound_files/piano/GB6.wav",
+  67: "./assets/sound_files/piano/G6.wav",
+  68: "./assets/sound_files/piano/AB6.wav",
+  69: "./assets/sound_files/piano/A6.wav",
+  70: "./assets/sound_files/piano/BB6.wav",
+  71: "./assets/sound_files/piano/B6.wav",
+  72: "./assets/sound_files/piano/C7.wav",
+  73: "./assets/sound_files/piano/DB7.wav",
+  74: "./assets/sound_files/piano/D7.wav",
+  75: "./assets/sound_files/piano/EB7.wav",
+  76: "./assets/sound_files/piano/E7.wav",
+  77: "./assets/sound_files/piano/F7.wav"
+};
+
+/***/ }),
+
 /***/ "./javascripts/sequencer.js":
 /*!**********************************!*\
   !*** ./javascripts/sequencer.js ***!
@@ -170,45 +517,15 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _square_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./square.js */ "./javascripts/square.js");
+/* harmony import */ var _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./piano_filepaths.js */ "./javascripts/piano_filepaths.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
- // const COLORS = [
-//   "#ff70b2",
-//   "#ff6394",
-//   "#ff4f75",
-//   "#ff3a4b",
-//   "#ff2134",
-//   "#e5091c"
-// ];
 
-var MARIMBA = {
-  6: "./assets/sound_files/marimba/mar_b3.wav",
-  9: "./assets/sound_files/marimba/mar_c3.wav",
-  8: "./assets/sound_files/marimba/mar_e3.wav",
-  7: "./assets/sound_files/marimba/mar_g3.wav",
-  3: "./assets/sound_files/marimba/mar_a4.wav",
-  5: "./assets/sound_files/marimba/mar_d4.wav",
-  4: "./assets/sound_files/marimba/mar_f4.wav",
-  0: "./assets/sound_files/marimba/mar_b5.wav",
-  2: "./assets/sound_files/marimba/mar_c5.wav",
-  1: "./assets/sound_files/marimba/mar_e5.wav"
-};
-var PIANO_ONE = {
-  0: "./assets/sound_files/piano/C2.wav",
-  1: "./assets/sound_files/piano/C3.wav",
-  2: "./assets/sound_files/piano/C4.wav",
-  3: "./assets/sound_files/piano/C5.wav",
-  4: "./assets/sound_files/piano/C6.wav",
-  5: "./assets/sound_files/piano/C7.wav",
-  6: "./assets/sound_files/piano/D1.wav",
-  7: "./assets/sound_files/piano/D2.wav",
-  8: "./assets/sound_files/piano/D3.wav",
-  9: "./assets/sound_files/piano/F2.wav"
-};
+
 var COLOR_SCHEMES = {
   'Colorful': {
     'red': {
@@ -274,8 +591,6 @@ function () {
     this.ctx = ctx;
     this.currentColumn = 0;
     this.currentColorIdx = 0;
-    this.visualizer = visualizer;
-    this.visualizer.start();
     this.red = COLOR_SCHEMES['Colorful']['red'];
     this.blue = COLOR_SCHEMES["Colorful"]["blue"];
     this.green = COLOR_SCHEMES["Colorful"]["green"];
@@ -297,7 +612,7 @@ function () {
       return setInterval(function () {
         _this.triggerSquares(_this.currentColumn);
 
-        _this.currentColumn = (_this.currentColumn + 1) % 10;
+        _this.currentColumn = (_this.currentColumn + 1) % 20;
       }, this.tempoMs);
     }
   }, {
@@ -310,7 +625,7 @@ function () {
       this.sequencing = setInterval(function () {
         _this2.triggerSquares(_this2.currentColumn);
 
-        _this2.currentColumn = (_this2.currentColumn + 1) % 10;
+        _this2.currentColumn = (_this2.currentColumn + 1) % 20;
       }, this.tempoMs);
     }
   }, {
@@ -326,7 +641,7 @@ function () {
       this.sequencing = setInterval(function () {
         _this3.triggerSquares(_this3.currentColumn);
 
-        _this3.currentColumn = (_this3.currentColumn + 1) % 10;
+        _this3.currentColumn = (_this3.currentColumn + 1) % 20;
       }, this.tempoMs);
     }
   }, {
@@ -351,7 +666,7 @@ function () {
 
       while (squareIndices.length < 10) {
         squareIndices.push(this.squares[column]);
-        column += 10;
+        column += 20;
       }
 
       var currentColor = "rgb(".concat(this.red.value, ", ").concat(this.blue.value, ", ").concat(this.green.value, ")");
@@ -401,11 +716,9 @@ function () {
       var row = 0;
 
       for (var i = 0; i < 10; i++) {
-        // create audio here and apply to all j squares
-        // const audio = this.createAudioTag(MARIMBA[row]);
-        for (var j = 0; j < 10; j++) {
+        for (var j = 0; j < 20; j++) {
           var newSquareIndex = this.squares.length;
-          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, PIANO_ONE[row], newSquareIndex));
+          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][1][row].filePath, _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][1][row].idx, newSquareIndex));
           x += 50;
         }
 
@@ -480,23 +793,12 @@ function () {
       var square = this.squares[squareIdx];
       square.toggle();
       square.draw(this.ctx, this.style);
-
-      if (square.toggled) {
-        var radius = (square.index / 10 + 10) * 1.5; // this.visualizer.addCircle(
-        //   square.newColor, 
-        //   radius, 
-        //   square.index,
-        //   this.tempo);
-
-        this.visualizer.addSquare(0, 0, radius, square.newColor);
-      } else {// this.visualizer.deleteCircle(square.index);
-      }
     }
   }, {
     key: "squareIndexAtPos",
     value: function squareIndexAtPos(x, y) {
       var xIdx = Math.floor(x / 50);
-      var yIdx = Math.floor(y / 50) * 10;
+      var yIdx = Math.floor(y / 50) * 20;
       return xIdx + yIdx;
     }
   }]);
@@ -552,7 +854,7 @@ var TRAPEZOID_POINTS = [[PAIRS[2], PAIRS[6], PAIRS[7], PAIRS[8]], [PAIRS[3], PAI
 var Square =
 /*#__PURE__*/
 function () {
-  function Square(x, y, filepath, index) {
+  function Square(x, y, filepath, pianoIdx, index) {
     _classCallCheck(this, Square);
 
     this.x = x;
@@ -567,6 +869,8 @@ function () {
     this.audio.setAttribute("src", filepath);
     this.audio.setAttribute("id", index);
     this.audio.setAttribute("type", "audio/wav");
+    this.audio.setAttribute("class", "audioRow".concat(Math.floor(index / 20)));
+    this.audio.setAttribute("data-pianoIdx", pianoIdx);
     document.body.appendChild(this.audio);
   }
 
@@ -749,38 +1053,40 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./piano_filepaths.js */ "./javascripts/piano_filepaths.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var INSTRUMENTS = {
-  'Marimba': {
-    6: "./assets/sound_files/marimba/mar_b3.wav",
-    9: "./assets/sound_files/marimba/mar_c3.wav",
-    8: "./assets/sound_files/marimba/mar_e3.wav",
-    7: "./assets/sound_files/marimba/mar_g3.wav",
-    3: "./assets/sound_files/marimba/mar_a4.wav",
-    5: "./assets/sound_files/marimba/mar_d4.wav",
-    4: "./assets/sound_files/marimba/mar_f4.wav",
-    0: "./assets/sound_files/marimba/mar_b5.wav",
-    2: "./assets/sound_files/marimba/mar_c5.wav",
-    1: "./assets/sound_files/marimba/mar_e5.wav"
-  },
-  'Glockenspiel': {
-    0: "./assets/sound_files/glock_d1.wav",
-    1: "./assets/sound_files/glock_e1.wav",
-    2: "./assets/sound_files/glock_f1.wav",
-    3: "./assets/sound_files/glock_g1.wav",
-    4: "./assets/sound_files/glock_a2.wav",
-    5: "./assets/sound_files/glock_b2.wav",
-    6: './assets/sound_files/glock_c2.wav',
-    7: './assets/sound_files/glock_cs2.wav',
-    8: './assets/sound_files/glock_d2.wav',
-    9: './assets/sound_files/glock_e2.wav'
-  }
-};
+// const INSTRUMENTS = {
+//   'Marimba': {
+//     6: "./assets/sound_files/marimba/mar_b3.wav",
+//     9: "./assets/sound_files/marimba/mar_c3.wav",
+//     8: "./assets/sound_files/marimba/mar_e3.wav",
+//     7: "./assets/sound_files/marimba/mar_g3.wav",
+//     3: "./assets/sound_files/marimba/mar_a4.wav",
+//     5: "./assets/sound_files/marimba/mar_d4.wav",
+//     4: "./assets/sound_files/marimba/mar_f4.wav",
+//     0: "./assets/sound_files/marimba/mar_b5.wav",
+//     2: "./assets/sound_files/marimba/mar_c5.wav",
+//     1: "./assets/sound_files/marimba/mar_e5.wav"
+//   },
+//   'Glockenspiel': {
+//     0: "./assets/sound_files/glock_d1.wav",
+//     1: "./assets/sound_files/glock_e1.wav",
+//     2: "./assets/sound_files/glock_f1.wav",
+//     3: "./assets/sound_files/glock_g1.wav",
+//     4: "./assets/sound_files/glock_a2.wav",
+//     5: "./assets/sound_files/glock_b2.wav",
+//     6: './assets/sound_files/glock_c2.wav',
+//     7: './assets/sound_files/glock_cs2.wav',
+//     8: './assets/sound_files/glock_d2.wav',
+//     9: './assets/sound_files/glock_e2.wav',
+//   }
+// }
+
 var PRESETS = {
   'Preset 1': {
     bpm: 60,
@@ -810,26 +1116,36 @@ function () {
   }
 
   _createClass(Util, [{
-    key: "changeInstrument",
-    value: function changeInstrument(event, instrument) {
+    key: "changeOctave",
+    value: function changeOctave(event) {
       var allAudioTags = document.getElementsByTagName('audio');
-      var instrumentName;
-
-      if (instrument) {
-        instrumentName = instrument;
-      } else {
-        instrumentName = event.target.textContent;
-      }
-
-      var instrumentFilePaths = INSTRUMENTS[instrumentName];
+      var octaveTag = document.getElementById('octave-display');
+      var newOctaveValue = (parseInt(octaveTag.textContent) + 1) % 6;
+      octaveTag.textContent = "".concat(newOctaveValue);
+      var octaveFilePaths = _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_0__["PIANO"][newOctaveValue];
       var row = -1;
 
       for (var idx = 0; idx < allAudioTags.length; idx++) {
-        if (idx % 10 === 0) {
+        if (idx % 20 === 0) {
           row += 1;
         }
 
-        allAudioTags[idx].setAttribute("src", instrumentFilePaths[row]);
+        allAudioTags[idx].setAttribute("src", octaveFilePaths[row].filePath);
+      }
+    }
+  }, {
+    key: "changeSignature",
+    value: function changeSignature(event) {
+      console.log('changeSig', event);
+      var row = event.target.dataset.idx;
+      var rowAudioTags = document.getElementsByClassName("audioRow".concat(row));
+
+      if (event.target.textContent === " ") {
+        event.target.textContent = "#";
+      } else if (event.target.textContent === "#") {
+        event.target.textContent = "b";
+      } else {
+        event.target.textContent = " ";
       }
     }
   }, {
@@ -1023,57 +1339,44 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log('111');
   var canvas = document.getElementById("canvas");
-  var canvas2 = document.getElementById("canvas2");
-  var colors = document.getElementById('colors');
-  var instruments = document.getElementById('instruments');
-  var presets = document.getElementById('presets');
-  var plus = document.getElementById('plus');
-  var minus = document.getElementById('minus');
   var styles = document.getElementById('styles');
-  canvas.width = 500;
+  var colors = document.getElementById('colors');
+  var presets = document.getElementById('presets');
+  var octaves = document.getElementById('octaves');
+  var sharpFlats = document.getElementById('sharp-flats');
+  var plus = document.getElementById('plus');
+  var minus = document.getElementById('minus'); // const octaveMinus = document.getElementById('octave-minus');
+  // const octavePlus = document.getElementById('octave-plus');
+
+  canvas.width = 1000;
   canvas.height = 500;
-  canvas2.width = 500;
-  canvas2.height = 500;
   var ctx = canvas.getContext("2d");
-  var ctx2 = canvas2.getContext("2d");
-  var visualizer = new _javascripts_visualizer_js__WEBPACK_IMPORTED_MODULE_1__["default"](ctx2);
-  var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, visualizer);
+  var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
   var util = new _javascripts_util_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
   sequencer.draw(ctx);
   canvas.addEventListener('click', function (event) {
     return sequencer.toggleSquareAtPos(canvas, event);
+  }); // colors.addEventListener('click', (event) => util.changeColorScheme(event, sequencer));
+  // presets.addEventListener('click', (event) => util.setPreset(event, sequencer));
+  // styles.addEventListener('click', (event) => util.setStyle(event, sequencer));
+
+  octaves.addEventListener('click', function (event) {
+    return util.changeOctave(event);
   });
-  instruments.addEventListener('click', function (event) {
-    util.changeInstrument(event);
-    sequencer.resetSequence();
-  });
-  colors.addEventListener('click', function (event) {
-    return util.changeColorScheme(event, sequencer);
-  });
-  presets.addEventListener('click', function (event) {
-    return util.setPreset(event, sequencer);
-  });
-  styles.addEventListener('click', function (event) {
-    return util.setStyle(event, sequencer);
+  sharpFlats.addEventListener('click', function (event) {
+    return util.changeSignature(event);
   });
   plus.addEventListener('click', function () {
     var tempoTag = document.getElementById('bpm-display');
-    var currentTempo = parseInt(tempoTag.textContent.split(' ')[0]); // const newTempo = Math.floor(60000 / (currentTempo + 5));
-
+    var currentTempo = parseInt(tempoTag.textContent.split(' ')[0]);
     var newTextVal = currentTempo + 5;
-    visualizer.changeSpeed(currentTempo + 5); // sequencer.changeBpm(newTempo, newTextVal);
-
     sequencer.changeBpm(currentTempo + 5, newTextVal);
   });
   minus.addEventListener("click", function () {
     var tempoTag = document.getElementById("bpm-display");
-    var currentTempo = parseInt(tempoTag.textContent.split(" ")[0]); // const newTempo = Math.floor(60000 / (currentTempo - 5));
-
+    var currentTempo = parseInt(tempoTag.textContent.split(" ")[0]);
     var newTextVal = currentTempo - 5;
-    visualizer.changeSpeed(currentTempo - 5); // sequencer.changeBpm(newTempo, newTextVal);
-
     sequencer.changeBpm(currentTempo - 5, newTextVal);
   });
 });

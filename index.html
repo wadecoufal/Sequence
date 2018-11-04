@@ -7,55 +7,57 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Orbitron" rel="stylesheet">  </head>
 
   <body>
-    <div class="sidebar-one">
-      <div class="options-one">
-        <ul id="colors">
-          <li class="color-list-item">Colorful</li>
-          <li class="color-list-item">Muted</li>
-          <li class="color-list-item">Blue</li>
-        </ul>
-        
-        <ul id="presets" class="colors">
-          <li class="color-list-item">Preset 1</li>
-          <li class="color-list-item">Preset 2</li>
-          <li class="color-list-item">Preset 3</li>
-        </ul>
-      </div>
+    <div class='sequencer-key-control'>
+      <ul id="sharp-flats">
+        <li data-idx='0'> </li>
+        <li data-idx='1'> </li>
+        <li data-idx='2'> </li>
+        <li data-idx='3'> </li>
+        <li data-idx='4'> </li>
+        <li data-idx='5'> </li>
+        <li data-idx='6'> </li>
+        <li data-idx='7'> </li>
+        <li data-idx='8'> </li>
+        <li data-idx='9'> </li>
+      </ul>
       
-      <div class="options-two">
-        <ul id="instruments">
-          <li class="instrument-list-item">Marimba</li>
-          <li class="instrument-list-item">Xylo</li>
-        </ul>
+      
+      <div class="mid-content">
+        <h1 class="sequence-header">Seequence</h1>
+        <canvas id="canvas"></canvas>
+        <div class='music-controls'>
+          <div class="bpm">
+            <p id='minus'>-</p>
+            <div id="bpm-display">200 BPM</div>
+            <p id='plus'>+</p>
+          </div>
+          <div class="bpm" id="octaves">
+            <p id='octave-minus'>-</p>
+            <div id="octave-display">2</div>
+            <p id='octave-plus'>+</p>
+          </div>
+        </div>
         
-        <ul id="styles" class="colors">
-          <li class="color-list-item">Square</li>
-          <li class="color-list-item">Circle</li>
-          <li class="color-list-item">Jewel</li>
-        </ul>
       </div>
     </div>
     
 
-    <div class="mid-content">
-      <h1 class="sequence-header">Seequence</h1>
-      <canvas id="canvas"></canvas>
-      <div class="bpm">
-        <p id='minus'>-</p>
-        <div id="bpm-display">200 BPM</div>
-        <p id='plus'>+</p>
-      </div>
-    </div>
+    <!-- <div class="options-two">
+      <ul id="styles" class="colors">
+        <li class="color-list-item">Square</li>
+        <li class="color-list-item">Circle</li>
+        <li class="color-list-item">Jewel</li>
+      </ul>
 
-    <div class="circles">
-      <canvas id="canvas2"></canvas>
-    </div>
-
-    <!-- <div class="sidebar-two">
-      
-
+      <ul id='octaves' class="colors">
+        <li class="color-list-item">1</li>
+        <li class="color-list-item">2</li>
+        <li class="color-list-item">3</li>
+        <li class="color-list-item">4</li>
+        <li class="color-list-item">5</li>
+        <li class="color-list-item">6</li>
+      </ul>
     </div> -->
-    
   
     <script type="application/javascript" src="javascripts/bundle.js"></script>
   </body>
