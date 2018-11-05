@@ -135,8 +135,8 @@ class Sequencer {
         this.squares.push(new Square(
           x, 
           y, 
-          PIANO[3][row].filePath, 
-          PIANO[3][row].idx,
+          PIANO[4][row].filePath, 
+          PIANO[4][row].idx,
           newSquareIndex));
         x += 50;
       }

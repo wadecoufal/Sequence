@@ -172,338 +172,188 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PIANO", function() { return PIANO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PIANO_PATHS", function() { return PIANO_PATHS; });
 var PIANO = {
-  0: {
-    9: {
-      filePath: "./assets/sound_files/piano/C1.wav",
-      idx: 0
-    },
-    8: {
-      filePath: "./assets/sound_files/piano/D1.wav",
-      idx: 2
-    },
-    7: {
-      filePath: "./assets/sound_files/piano/E1.wav",
-      idx: 4
-    },
-    6: {
-      filePath: "./assets/sound_files/piano/F1.wav",
-      idx: 5
-    },
-    5: {
-      filePath: "./assets/sound_files/piano/G1.wav",
-      idx: 7
-    },
-    4: {
-      filePath: "./assets/sound_files/piano/A1.wav",
-      idx: 9
-    },
-    3: {
-      filePath: "./assets/sound_files/piano/B1.wav",
-      idx: 11
-    },
-    2: {
-      filePath: "./assets/sound_files/piano/C2.wav",
-      idx: 12
-    },
-    1: {
-      filePath: "./assets/sound_files/piano/D2.wav",
-      idx: 14
-    },
-    0: {
-      filePath: "./assets/sound_files/piano/E2.wav",
-      idx: 16
-    }
-  },
-  1: {
-    9: {
-      filePath: "./assets/sound_files/piano/C2.wav",
-      idx: 12
-    },
-    8: {
-      filePath: "./assets/sound_files/piano/D2.wav",
-      idx: 14
-    },
-    7: {
-      filePath: "./assets/sound_files/piano/E2.wav",
-      idx: 16
-    },
-    6: {
-      filePath: "./assets/sound_files/piano/F2.wav",
-      idx: 17
-    },
-    5: {
-      filePath: "./assets/sound_files/piano/G2.wav",
-      idx: 19
-    },
-    4: {
-      filePath: "./assets/sound_files/piano/A2.wav",
-      idx: 21
-    },
-    3: {
-      filePath: "./assets/sound_files/piano/B2.wav",
-      idx: 23
-    },
-    2: {
-      filePath: "./assets/sound_files/piano/C3.wav",
-      idx: 24
-    },
-    1: {
-      filePath: "./assets/sound_files/piano/D3.wav",
-      idx: 26
-    },
-    0: {
-      filePath: "./assets/sound_files/piano/E3.wav",
-      idx: 28
-    }
-  },
-  2: {
-    9: {
-      filePath: "./assets/sound_files/piano/C3.wav",
-      idx: 24
-    },
-    8: {
-      filePath: "./assets/sound_files/piano/D3.wav",
-      idx: 26
-    },
-    7: {
-      filePath: "./assets/sound_files/piano/E3.wav",
-      idx: 28
-    },
-    6: {
-      filePath: "./assets/sound_files/piano/F3.wav",
-      idx: 29
-    },
-    5: {
-      filePath: "./assets/sound_files/piano/G3.wav",
-      idx: 31
-    },
-    4: {
-      filePath: "./assets/sound_files/piano/A3.wav",
-      idx: 33
-    },
-    3: {
-      filePath: "./assets/sound_files/piano/B3.wav",
-      idx: 35
-    },
-    2: {
-      filePath: "./assets/sound_files/piano/C4.wav",
-      idx: 36
-    },
-    1: {
-      filePath: "./assets/sound_files/piano/D4.wav",
-      idx: 38
-    },
-    0: {
-      filePath: "./assets/sound_files/piano/E4.wav",
-      idx: 40
-    }
-  },
-  3: {
-    9: {
-      filePath: "./assets/sound_files/piano/C4.wav",
-      idx: 36
-    },
-    8: {
-      filePath: "./assets/sound_files/piano/D4.wav",
-      idx: 38
-    },
-    7: {
-      filePath: "./assets/sound_files/piano/E4.wav",
-      idx: 40
-    },
-    6: {
-      filePath: "./assets/sound_files/piano/F4.wav",
-      idx: 41
-    },
-    5: {
-      filePath: "./assets/sound_files/piano/G4.wav",
-      idx: 43
-    },
-    4: {
-      filePath: "./assets/sound_files/piano/A4.wav",
-      idx: 45
-    },
-    3: {
-      filePath: "./assets/sound_files/piano/B4.wav",
-      idx: 47
-    },
-    2: {
-      filePath: "./assets/sound_files/piano/C5.wav",
-      idx: 48
-    },
-    1: {
-      filePath: "./assets/sound_files/piano/D5.wav",
-      idx: 50
-    },
-    0: {
-      filePath: "./assets/sound_files/piano/E5.wav",
-      idx: 52
-    }
-  },
+  // 0: {
+  //   9: {filePath: "./assets/sound_files/piano/C1.wav", idx: 0},
+  //   8: {filePath: "./assets/sound_files/piano/D1.wav", idx: 2},
+  //   7: {filePath: "./assets/sound_files/piano/E1.wav", idx: 4},
+  //   6: {filePath: "./assets/sound_files/piano/F1.wav", idx: 5},
+  //   5: {filePath: "./assets/sound_files/piano/G1.wav", idx: 7},
+  //   4: {filePath: "./assets/sound_files/piano/A1.wav", idx: 9},
+  //   3: {filePath: "./assets/sound_files/piano/B1.wav", idx: 11},
+  //   2: {filePath: "./assets/sound_files/piano/C2.wav", idx: 12},
+  //   1: {filePath: "./assets/sound_files/piano/D2.wav", idx: 14},
+  //   0: {filePath: "./assets/sound_files/piano/E2.wav", idx: 16},
+  // },
+  // 1: {
+  //   9: { filePath: "./assets/sound_files/piano/C2.wav", idx: 12 },
+  //   8: { filePath: "./assets/sound_files/piano/D2.wav", idx: 14 },
+  //   7: { filePath: "./assets/sound_files/piano/E2.wav", idx: 16 },
+  //   6: { filePath: "./assets/sound_files/piano/F2.wav", idx: 17 },
+  //   5: { filePath: "./assets/sound_files/piano/G2.wav", idx: 19 },
+  //   4: { filePath: "./assets/sound_files/piano/A2.wav", idx: 21 },
+  //   3: { filePath: "./assets/sound_files/piano/B2.wav", idx: 23 },
+  //   2: { filePath: "./assets/sound_files/piano/C3.wav", idx: 24 },
+  //   1: { filePath: "./assets/sound_files/piano/D3.wav", idx: 26 },
+  //   0: { filePath: "./assets/sound_files/piano/E3.wav", idx: 28 },
+  // },
+  // 2: {
+  //   9: { filePath: "./assets/sound_files/piano/C3.wav", idx: 24 },
+  //   8: { filePath: "./assets/sound_files/piano/D3.wav", idx: 26 },
+  //   7: { filePath: "./assets/sound_files/piano/E3.wav", idx: 28 },
+  //   6: { filePath: "./assets/sound_files/piano/F3.wav", idx: 29 },
+  //   5: { filePath: "./assets/sound_files/piano/G3.wav", idx: 31 },
+  //   4: { filePath: "./assets/sound_files/piano/A3.wav", idx: 33 },
+  //   3: { filePath: "./assets/sound_files/piano/B3.wav", idx: 35 },
+  //   2: { filePath: "./assets/sound_files/piano/C4.wav", idx: 36 },
+  //   1: { filePath: "./assets/sound_files/piano/D4.wav", idx: 38 },
+  //   0: { filePath: "./assets/sound_files/piano/E4.wav", idx: 40 },
+  // }, 
+  // 3: {
+  //   9: { filePath: "./assets/sound_files/piano/C4.wav", idx: 36 },
+  //   8: { filePath: "./assets/sound_files/piano/D4.wav", idx: 38 },
+  //   7: { filePath: "./assets/sound_files/piano/E4.wav", idx: 40 },
+  //   6: { filePath: "./assets/sound_files/piano/F4.wav", idx: 41 },
+  //   5: { filePath: "./assets/sound_files/piano/G4.wav", idx: 43 },
+  //   4: { filePath: "./assets/sound_files/piano/A4.wav", idx: 45 },
+  //   3: { filePath: "./assets/sound_files/piano/B4.wav", idx: 47 },
+  //   2: { filePath: "./assets/sound_files/piano/C5.wav", idx: 48 },
+  //   1: { filePath: "./assets/sound_files/piano/D5.wav", idx: 50 },
+  //   0: { filePath: "./assets/sound_files/piano/E5.wav", idx: 52 },
+  // },
   4: {
     9: {
       filePath: "./assets/sound_files/piano/C5.wav",
-      idx: 48
+      idx: 1
     },
     8: {
       filePath: "./assets/sound_files/piano/D5.wav",
-      idx: 50
+      idx: 3
     },
     7: {
       filePath: "./assets/sound_files/piano/E5.wav",
-      idx: 52
+      idx: 5
     },
     6: {
       filePath: "./assets/sound_files/piano/F5.wav",
-      idx: 53
+      idx: 6
     },
     5: {
       filePath: "./assets/sound_files/piano/G5.wav",
-      idx: 55
+      idx: 8
     },
     4: {
       filePath: "./assets/sound_files/piano/A5.wav",
-      idx: 57
+      idx: 10
     },
     3: {
       filePath: "./assets/sound_files/piano/B5.wav",
-      idx: 59
+      idx: 12
     },
     2: {
       filePath: "./assets/sound_files/piano/C6.wav",
-      idx: 60
+      idx: 13
     },
     1: {
       filePath: "./assets/sound_files/piano/D6.wav",
-      idx: 62
+      idx: 15
     },
     0: {
       filePath: "./assets/sound_files/piano/E6.wav",
-      idx: 64
+      idx: 17
     }
-  },
-  5: {
-    9: {
-      filePath: "./assets/sound_files/piano/C6.wav",
-      idx: 60
-    },
-    8: {
-      filePath: "./assets/sound_files/piano/D6.wav",
-      idx: 62
-    },
-    7: {
-      filePath: "./assets/sound_files/piano/E6.wav",
-      idx: 64
-    },
-    6: {
-      filePath: "./assets/sound_files/piano/F6.wav",
-      idx: 65
-    },
-    5: {
-      filePath: "./assets/sound_files/piano/G6.wav",
-      idx: 67
-    },
-    4: {
-      filePath: "./assets/sound_files/piano/A6.wav",
-      idx: 69
-    },
-    3: {
-      filePath: "./assets/sound_files/piano/B6.wav",
-      idx: 71
-    },
-    2: {
-      filePath: "./assets/sound_files/piano/C7.wav",
-      idx: 72
-    },
-    1: {
-      filePath: "./assets/sound_files/piano/D7.wav",
-      idx: 74
-    },
-    0: {
-      filePath: "./assets/sound_files/piano/E7.wav",
-      idx: 76
-    }
-  }
+  } // 5: {
+  //   9: { filePath: "./assets/sound_files/piano/C6.wav", idx: 60 },
+  //   8: { filePath: "./assets/sound_files/piano/D6.wav", idx: 62 },
+  //   7: { filePath: "./assets/sound_files/piano/E6.wav", idx: 64 },
+  //   6: { filePath: "./assets/sound_files/piano/F6.wav", idx: 65 },
+  //   5: { filePath: "./assets/sound_files/piano/G6.wav", idx: 67 },
+  //   4: { filePath: "./assets/sound_files/piano/A6.wav", idx: 69 },
+  //   3: { filePath: "./assets/sound_files/piano/B6.wav", idx: 71 },
+  //   2: { filePath: "./assets/sound_files/piano/C7.wav", idx: 72 },
+  //   1: { filePath: "./assets/sound_files/piano/D7.wav", idx: 74 },
+  //   0: { filePath: "./assets/sound_files/piano/E7.wav", idx: 76 },
+  // }
+
 };
 var PIANO_PATHS = {
-  0: "./assets/sound_files/piano/C1.wav",
-  1: "./assets/sound_files/piano/DB1.wav",
-  2: "./assets/sound_files/piano/D1.wav",
-  3: "./assets/sound_files/piano/EB1.wav",
-  4: "./assets/sound_files/piano/E1.wav",
-  5: "./assets/sound_files/piano/F1.wav",
-  6: "./assets/sound_files/piano/GB1.wav",
-  7: "./assets/sound_files/piano/G1.wav",
-  8: "./assets/sound_files/piano/AB1.wav",
-  9: "./assets/sound_files/piano/A1.wav",
-  10: "./assets/sound_files/piano/BB1.wav",
-  11: "./assets/sound_files/piano/B1.wav",
-  12: "./assets/sound_files/piano/C2.wav",
-  13: "./assets/sound_files/piano/DB2.wav",
-  14: "./assets/sound_files/piano/D2.wav",
-  15: "./assets/sound_files/piano/EB2.wav",
-  16: "./assets/sound_files/piano/E2.wav",
-  17: "./assets/sound_files/piano/F2.wav",
-  18: "./assets/sound_files/piano/GB2.wav",
-  19: "./assets/sound_files/piano/G2.wav",
-  20: "./assets/sound_files/piano/AB2.wav",
-  21: "./assets/sound_files/piano/A2.wav",
-  22: "./assets/sound_files/piano/BB2.wav",
-  23: "./assets/sound_files/piano/B2.wav",
-  24: "./assets/sound_files/piano/C3.wav",
-  25: "./assets/sound_files/piano/DB3.wav",
-  26: "./assets/sound_files/piano/D3.wav",
-  27: "./assets/sound_files/piano/EB3.wav",
-  28: "./assets/sound_files/piano/E3.wav",
-  29: "./assets/sound_files/piano/F3.wav",
-  30: "./assets/sound_files/piano/GB3.wav",
-  31: "./assets/sound_files/piano/G3.wav",
-  32: "./assets/sound_files/piano/AB3.wav",
-  33: "./assets/sound_files/piano/A3.wav",
-  34: "./assets/sound_files/piano/BB3.wav",
-  35: "./assets/sound_files/piano/B3.wav",
-  36: "./assets/sound_files/piano/C4.wav",
-  37: "./assets/sound_files/piano/DB4.wav",
-  38: "./assets/sound_files/piano/D4.wav",
-  39: "./assets/sound_files/piano/EB4.wav",
-  40: "./assets/sound_files/piano/E4.wav",
-  41: "./assets/sound_files/piano/F4.wav",
-  42: "./assets/sound_files/piano/GB4.wav",
-  43: "./assets/sound_files/piano/G4.wav",
-  44: "./assets/sound_files/piano/AB4.wav",
-  45: "./assets/sound_files/piano/A4.wav",
-  46: "./assets/sound_files/piano/BB4.wav",
-  47: "./assets/sound_files/piano/B4.wav",
-  48: "./assets/sound_files/piano/C5.wav",
-  49: "./assets/sound_files/piano/DB5.wav",
-  50: "./assets/sound_files/piano/D5.wav",
-  51: "./assets/sound_files/piano/EB5.wav",
-  52: "./assets/sound_files/piano/E5.wav",
-  53: "./assets/sound_files/piano/F5.wav",
-  54: "./assets/sound_files/piano/GB5.wav",
-  55: "./assets/sound_files/piano/G5.wav",
-  56: "./assets/sound_files/piano/AB5.wav",
-  57: "./assets/sound_files/piano/A5.wav",
-  58: "./assets/sound_files/piano/BB5.wav",
-  59: "./assets/sound_files/piano/B5.wav",
-  60: "./assets/sound_files/piano/C6.wav",
-  61: "./assets/sound_files/piano/DB6.wav",
-  62: "./assets/sound_files/piano/D6.wav",
-  63: "./assets/sound_files/piano/EB6.wav",
-  64: "./assets/sound_files/piano/E6.wav",
-  65: "./assets/sound_files/piano/F6.wav",
-  66: "./assets/sound_files/piano/GB6.wav",
-  67: "./assets/sound_files/piano/G6.wav",
-  68: "./assets/sound_files/piano/AB6.wav",
-  69: "./assets/sound_files/piano/A6.wav",
-  70: "./assets/sound_files/piano/BB6.wav",
-  71: "./assets/sound_files/piano/B6.wav",
-  72: "./assets/sound_files/piano/C7.wav",
-  73: "./assets/sound_files/piano/DB7.wav",
-  74: "./assets/sound_files/piano/D7.wav",
-  75: "./assets/sound_files/piano/EB7.wav",
-  76: "./assets/sound_files/piano/E7.wav",
-  77: "./assets/sound_files/piano/F7.wav"
+  // 0: "./assets/sound_files/piano/C1.wav",
+  // 1: "./assets/sound_files/piano/DB1.wav",
+  // 2: "./assets/sound_files/piano/D1.wav",
+  // 3: "./assets/sound_files/piano/EB1.wav",
+  // 4: "./assets/sound_files/piano/E1.wav",
+  // 5: "./assets/sound_files/piano/F1.wav",
+  // 6: "./assets/sound_files/piano/GB1.wav",
+  // 7: "./assets/sound_files/piano/G1.wav",
+  // 8: "./assets/sound_files/piano/AB1.wav",
+  // 9: "./assets/sound_files/piano/A1.wav",
+  // 10: "./assets/sound_files/piano/BB1.wav",
+  // 11: "./assets/sound_files/piano/B1.wav",
+  // 12: "./assets/sound_files/piano/C2.wav",
+  // 13: "./assets/sound_files/piano/DB2.wav",
+  // 14: "./assets/sound_files/piano/D2.wav",
+  // 15: "./assets/sound_files/piano/EB2.wav",
+  // 16: "./assets/sound_files/piano/E2.wav",
+  // 17: "./assets/sound_files/piano/F2.wav",
+  // 18: "./assets/sound_files/piano/GB2.wav",
+  // 19: "./assets/sound_files/piano/G2.wav",
+  // 20: "./assets/sound_files/piano/AB2.wav",
+  // 21: "./assets/sound_files/piano/A2.wav",
+  // 22: "./assets/sound_files/piano/BB2.wav",
+  // 23: "./assets/sound_files/piano/B2.wav",
+  // 24: "./assets/sound_files/piano/C3.wav",
+  // 25: "./assets/sound_files/piano/DB3.wav",
+  // 26: "./assets/sound_files/piano/D3.wav",
+  // 27: "./assets/sound_files/piano/EB3.wav",
+  // 28: "./assets/sound_files/piano/E3.wav",
+  // 29: "./assets/sound_files/piano/F3.wav",
+  // 30: "./assets/sound_files/piano/GB3.wav",
+  // 31: "./assets/sound_files/piano/G3.wav",
+  // 32: "./assets/sound_files/piano/AB3.wav",
+  // 33: "./assets/sound_files/piano/A3.wav",
+  // 34: "./assets/sound_files/piano/BB3.wav",
+  // 35: "./assets/sound_files/piano/B3.wav",
+  // 36: "./assets/sound_files/piano/C4.wav",
+  // 37: "./assets/sound_files/piano/DB4.wav",
+  // 38: "./assets/sound_files/piano/D4.wav",
+  // 39: "./assets/sound_files/piano/EB4.wav",
+  // 40: "./assets/sound_files/piano/E4.wav",
+  // 41: "./assets/sound_files/piano/F4.wav",
+  // 42: "./assets/sound_files/piano/GB4.wav",
+  // 43: "./assets/sound_files/piano/G4.wav",
+  // 44: "./assets/sound_files/piano/AB4.wav",
+  // 45: "./assets/sound_files/piano/A4.wav",
+  // 46: "./assets/sound_files/piano/BB4.wav",
+  0: "./assets/sound_files/piano/B4.wav",
+  1: "./assets/sound_files/piano/C5.wav",
+  2: "./assets/sound_files/piano/DB5.wav",
+  3: "./assets/sound_files/piano/D5.wav",
+  4: "./assets/sound_files/piano/EB5.wav",
+  5: "./assets/sound_files/piano/E5.wav",
+  6: "./assets/sound_files/piano/F5.wav",
+  7: "./assets/sound_files/piano/GB5.wav",
+  8: "./assets/sound_files/piano/G5.wav",
+  9: "./assets/sound_files/piano/AB5.wav",
+  10: "./assets/sound_files/piano/A5.wav",
+  11: "./assets/sound_files/piano/BB5.wav",
+  12: "./assets/sound_files/piano/B5.wav",
+  13: "./assets/sound_files/piano/C6.wav",
+  14: "./assets/sound_files/piano/DB6.wav",
+  15: "./assets/sound_files/piano/D6.wav",
+  16: "./assets/sound_files/piano/EB6.wav",
+  17: "./assets/sound_files/piano/E6.wav",
+  18: "./assets/sound_files/piano/F6.wav" // 66: "./assets/sound_files/piano/GB6.wav",
+  // 67: "./assets/sound_files/piano/G6.wav",
+  // 68: "./assets/sound_files/piano/AB6.wav",
+  // 69: "./assets/sound_files/piano/A6.wav",
+  // 70: "./assets/sound_files/piano/BB6.wav",
+  // 71: "./assets/sound_files/piano/B6.wav",
+  // 72: "./assets/sound_files/piano/C7.wav",
+  // 73: "./assets/sound_files/piano/DB7.wav",
+  // 74: "./assets/sound_files/piano/D7.wav",
+  // 75: "./assets/sound_files/piano/EB7.wav",
+  // 76: "./assets/sound_files/piano/E7.wav",
+  // 77: "./assets/sound_files/piano/F7.wav"
+
 };
 
 /***/ }),
@@ -719,7 +569,7 @@ function () {
       for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 20; j++) {
           var newSquareIndex = this.squares.length;
-          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][3][row].filePath, _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][3][row].idx, newSquareIndex));
+          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][4][row].filePath, _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][4][row].idx, newSquareIndex));
           x += 50;
         }
 
@@ -1136,16 +986,18 @@ function () {
 
       if (event.target.textContent === " ") {
         event.target.textContent = "#";
-        console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) + 1);
+        console.log('sharp-before', rowAudioTags[0].dataset.pianoidx);
 
         for (var i = 0; i < rowAudioTags.length; i++) {
           var pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
           rowAudioTags[i].setAttribute('src', _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_0__["PIANO_PATHS"][pianoIdx + 1]);
           rowAudioTags[i].dataset.pianoidx = pianoIdx + 1;
         }
+
+        console.log("sharp-after", rowAudioTags[0].dataset.pianoidx);
       } else if (event.target.textContent === "#") {
         event.target.textContent = "b";
-        console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) - 2);
+        console.log("flat-before", rowAudioTags[0].dataset.pianoidx);
 
         for (var _i = 0; _i < rowAudioTags.length; _i++) {
           var _pianoIdx = parseInt(rowAudioTags[_i].dataset.pianoidx);
@@ -1156,9 +1008,11 @@ function () {
             rowAudioTags[_i].dataset.pianoidx = _pianoIdx - 2;
           }
         }
+
+        console.log("flat-after", rowAudioTags[0].dataset.pianoidx);
       } else {
         event.target.textContent = " ";
-        console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) + 1);
+        console.log("nat-before", rowAudioTags[0].dataset.pianoidx);
 
         for (var _i2 = 0; _i2 < rowAudioTags.length; _i2++) {
           var _pianoIdx2 = parseInt(rowAudioTags[_i2].dataset.pianoidx);
@@ -1167,6 +1021,8 @@ function () {
 
           rowAudioTags[_i2].dataset.pianoidx = _pianoIdx2 + 1;
         }
+
+        console.log("nat-after", rowAudioTags[0].dataset.pianoidx);
       }
     }
   }, {
@@ -1382,8 +1238,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var canvas = document.getElementById("canvas");
   var styles = document.getElementById('styles');
   var colors = document.getElementById('colors');
-  var presets = document.getElementById('presets');
-  var octaves = document.getElementById('octaves');
+  var presets = document.getElementById('presets'); // const octaves = document.getElementById('octaves');
+
   var sharpFlats = document.getElementById('sharp-flats');
   var plus = document.getElementById('plus');
   var minus = document.getElementById('minus');
@@ -1404,10 +1260,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   styles.addEventListener('click', function (event) {
     return util.setStyle(event, sequencer);
-  });
-  octaves.addEventListener('click', function (event) {
-    return util.changeOctave(event);
-  });
+  }); // octaves.addEventListener('click', (event) => util.changeOctave(event));
+
   sharpFlats.addEventListener('click', function (event) {
     return util.changeSignature(event);
   });

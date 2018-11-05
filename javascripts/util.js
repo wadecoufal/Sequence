@@ -65,7 +65,7 @@ class Util {
 
     if (event.target.textContent === " ") {
       event.target.textContent = "#";
-      console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) + 1)
+      console.log('sharp-before', rowAudioTags[0].dataset.pianoidx);
 
       for (let i = 0; i < rowAudioTags.length; i++) {
         const pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
@@ -73,9 +73,12 @@ class Util {
         rowAudioTags[i].dataset.pianoidx = pianoIdx + 1;
       }
 
+      console.log("sharp-after", rowAudioTags[0].dataset.pianoidx);
+
     } else if (event.target.textContent === "#") {
       event.target.textContent = "b";
-      console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) - 2)
+      
+      console.log("flat-before", rowAudioTags[0].dataset.pianoidx);
 
       for (let i = 0; i < rowAudioTags.length; i++) {
         const pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
@@ -84,10 +87,13 @@ class Util {
           rowAudioTags[i].dataset.pianoidx = pianoIdx - 2;
         }
       }
+      console.log("flat-after", rowAudioTags[0].dataset.pianoidx);
+
 
     } else {
       event.target.textContent = " ";
-      console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) + 1)
+
+      console.log("nat-before", rowAudioTags[0].dataset.pianoidx);
 
 
       for (let i = 0; i < rowAudioTags.length; i++) {
@@ -95,6 +101,8 @@ class Util {
         rowAudioTags[i].setAttribute("src", PIANO_PATHS[pianoIdx + 1]);
         rowAudioTags[i].dataset.pianoidx = pianoIdx + 1;
       }
+      console.log("nat-after", rowAudioTags[0].dataset.pianoidx);
+
     }
   }
 

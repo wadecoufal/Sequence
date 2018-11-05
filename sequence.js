@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const styles = document.getElementById('styles');
   const colors = document.getElementById('colors');
   const presets = document.getElementById('presets');
-  const octaves = document.getElementById('octaves');
+  // const octaves = document.getElementById('octaves');
 
   const sharpFlats = document.getElementById('sharp-flats');
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   colors.addEventListener('click', (event) => util.changeColorScheme(event, sequencer));
   presets.addEventListener('click', (event) => util.setPreset(event, sequencer));
   styles.addEventListener('click', (event) => util.setStyle(event, sequencer));
-  octaves.addEventListener('click', (event) => util.changeOctave(event));
+  // octaves.addEventListener('click', (event) => util.changeOctave(event));
 
   sharpFlats.addEventListener('click', (event) => util.changeSignature(event));
 
