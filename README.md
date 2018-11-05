@@ -6,12 +6,20 @@ Sequence is a simple way to create music.
 
 The sequencer is a grid of squares, each of which represent a note. The sequencer passes from left to right on the grid, and any square that is toggled on will sound. When the sequencer reaches the end of the grid, it loops back to the beginning. It's a great way to improvise, as the squares can be toggled in real time.
 
+![alt-text](https://github.com/wadecoufal/Sequence/blob/gh-pages/sequence1.png)
+
 ## Technologies
 
 - Vanilla Javascript for basic logic
 - HTML5 Canvas for animations and rendering
-- Web Audio API for generating sounds
 - Webpack for bundling javascript files
+
+## Functionality
+
+Users can toggle squares, change the tempo (beats per minute), change the style of the squares, color scheme,
+the key signature, and hear preset patterns.
+
+The tempo is set using setInterval. When the user changes the tempo, the interval is adjusted accordingly.
 
 ```
 startSequence() {
@@ -44,3 +52,5 @@ changeBpm(newTempo, newTextVal) {
   }, this.tempoMs);
 }
 ```
+
+![alt-text](https://github.com/wadecoufal/Sequence/blob/gh-pages/sequence2.png)
