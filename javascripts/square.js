@@ -39,7 +39,7 @@ const TRAPEZOID_POINTS = [
     // this.drawTrapezoid(ctx, PAIRS[1], PAIRS[5], PAIRS[7], PAIRS[8], GRAY_THREE); // bottom
 
 class Square {
-  constructor(x, y, filepath, pianoIdx, index) {
+  constructor(x, y, audio, index) {
     this.x = x;
     this.y = y;
     this.color = "rgb(0, 0, 0)";
@@ -49,15 +49,16 @@ class Square {
     this.index = index;
 
     // this.audio = filepath;
+    this.audio = audio;
 
     // set audio in sequencer (10 instead of 100)
-    this.audio = document.createElement("audio");
-    this.audio.setAttribute("src", filepath);
-    this.audio.setAttribute("id", index);
-    this.audio.setAttribute("type", "audio/wav");
-    this.audio.setAttribute("class", `audioRow${Math.floor(index/20)}`);
-    this.audio.setAttribute("data-pianoIdx", pianoIdx);
-    document.body.appendChild(this.audio);
+    // this.audio = document.createElement("audio");
+    // this.audio.setAttribute("src", filepath);
+    // this.audio.setAttribute("id", index);
+    // this.audio.setAttribute("type", "audio/wav");
+    // this.audio.setAttribute("class", `audioRow${Math.floor(index/20)}`);
+    // this.audio.setAttribute("data-pianoIdx", pianoIdx);
+    // document.body.appendChild(this.audio);
   }
 
   soundNote(nextColor, ctx) {

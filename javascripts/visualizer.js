@@ -25,7 +25,6 @@ class Visualizer {
 
   deleteCircle(idx) {
     delete this.circles[idx];
-    console.log(this.circles);
   }
 
   moveCircles() {
@@ -39,7 +38,6 @@ class Visualizer {
       square.move();
       if (square.y > 550 || square.x > 550) {
         delete this.squares[square];
-        console.log(this.squares);
       }
     })
   }

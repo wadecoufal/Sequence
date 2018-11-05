@@ -1,5 +1,4 @@
 import Sequencer from './javascripts/sequencer.js';
-import Visualizer from './javascripts/visualizer.js';
 import Util from './javascripts/util.js';
 
 document.addEventListener("DOMContentLoaded", () => {

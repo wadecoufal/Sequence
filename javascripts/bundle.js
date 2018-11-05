@@ -86,80 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./javascripts/circle.js":
-/*!*******************************!*\
-  !*** ./javascripts/circle.js ***!
-  \*******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Circle =
-/*#__PURE__*/
-function () {
-  function Circle(x, y, radius, color, tempo) {
-    _classCallCheck(this, Circle);
-
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.color = color;
-    this.xDir = 'left';
-    this.yDir = 'down';
-    this.speed = tempo / 100;
-  }
-
-  _createClass(Circle, [{
-    key: "move",
-    value: function move() {
-      if (this.x > 500) {
-        this.xDir = 'left';
-      } else if (this.x < 0) {
-        this.xDir = 'right';
-      }
-
-      if (this.y > 500) {
-        this.yDir = "up";
-      } else if (this.x < 0) {
-        this.yDir = "down";
-      }
-
-      if (this.xDir === 'left') {
-        this.x = this.x - this.speed;
-      } else if (this.xDir === 'right') {
-        this.x = this.x + this.speed;
-      }
-
-      if (this.yDir === 'up') {
-        this.y = this.y - this.speed;
-      } else if (this.yDir === 'down') {
-        this.y = this.y + this.speed;
-      }
-    }
-  }, {
-    key: "draw",
-    value: function draw(ctx) {
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-      ctx.fill();
-    }
-  }]);
-
-  return Circle;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (Circle);
-
-/***/ }),
-
 /***/ "./javascripts/piano_filepaths.js":
 /*!****************************************!*\
   !*** ./javascripts/piano_filepaths.js ***!
@@ -505,7 +431,6 @@ function () {
   }, {
     key: "changeStyle",
     value: function changeStyle(style) {
-      console.log('IN SEQUENCER CHANGE STYLE', style);
       this.style = style;
     }
   }, {
@@ -567,9 +492,17 @@ function () {
       var row = 0;
 
       for (var i = 0; i < 10; i++) {
+        var audio = document.createElement('audio');
+        audio.setAttribute('src', _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][4][row].filePath);
+        audio.setAttribute('id', row);
+        audio.setAttribute('type', 'audio/wav');
+        audio.setAttribute("class", "audioRow".concat(row));
+        audio.setAttribute("data-pianoIdx", _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][4][row].idx);
+        document.body.appendChild(audio);
+
         for (var j = 0; j < 20; j++) {
           var newSquareIndex = this.squares.length;
-          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][4][row].filePath, _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_1__["PIANO"][4][row].idx, newSquareIndex));
+          this.squares.push(new _square_js__WEBPACK_IMPORTED_MODULE_0__["default"](x, y, audio, newSquareIndex));
           x += 50;
         }
 
@@ -641,7 +574,6 @@ function () {
           y = _this$getCursorPos.y;
 
       var squareIdx = this.squareIndexAtPos(x, y);
-      console.log('idx', squareIdx);
       var square = this.squares[squareIdx];
       square.toggle();
       square.draw(this.ctx, this.style);
@@ -706,7 +638,7 @@ var TRAPEZOID_POINTS = [[PAIRS[2], PAIRS[6], PAIRS[7], PAIRS[8]], [PAIRS[3], PAI
 var Square =
 /*#__PURE__*/
 function () {
-  function Square(x, y, filepath, pianoIdx, index) {
+  function Square(x, y, audio, index) {
     _classCallCheck(this, Square);
 
     this.x = x;
@@ -715,15 +647,15 @@ function () {
     this.newColor = "rgb(0, 0, 0)";
     this.toggled = false;
     this.index = index; // this.audio = filepath;
-    // set audio in sequencer (10 instead of 100)
 
-    this.audio = document.createElement("audio");
-    this.audio.setAttribute("src", filepath);
-    this.audio.setAttribute("id", index);
-    this.audio.setAttribute("type", "audio/wav");
-    this.audio.setAttribute("class", "audioRow".concat(Math.floor(index / 20)));
-    this.audio.setAttribute("data-pianoIdx", pianoIdx);
-    document.body.appendChild(this.audio);
+    this.audio = audio; // set audio in sequencer (10 instead of 100)
+    // this.audio = document.createElement("audio");
+    // this.audio.setAttribute("src", filepath);
+    // this.audio.setAttribute("id", index);
+    // this.audio.setAttribute("type", "audio/wav");
+    // this.audio.setAttribute("class", `audioRow${Math.floor(index/20)}`);
+    // this.audio.setAttribute("data-pianoIdx", pianoIdx);
+    // document.body.appendChild(this.audio);
   }
 
   _createClass(Square, [{
@@ -845,57 +777,6 @@ function () {
 
 /***/ }),
 
-/***/ "./javascripts/squares.js":
-/*!********************************!*\
-  !*** ./javascripts/squares.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Square =
-/*#__PURE__*/
-function () {
-  function Square(x, y, width, color, idx) {
-    _classCallCheck(this, Square);
-
-    this.x = Math.floor(Math.random() * 500 + 1);
-    this.y = 0;
-    this.idx = idx;
-    this.width = width;
-    this.color = color;
-    this.acc = 1.05;
-    this.velocity = 2;
-  }
-
-  _createClass(Square, [{
-    key: "move",
-    value: function move() {
-      this.y += this.velocity;
-      this.velocity *= this.acc;
-    }
-  }, {
-    key: "draw",
-    value: function draw(ctx) {
-      ctx.fillStyle = this.color;
-      ctx.fillRect(this.x, this.y, this.width, this.width);
-    }
-  }]);
-
-  return Square;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (Square);
-
-/***/ }),
-
 /***/ "./javascripts/util.js":
 /*!*****************************!*\
   !*** ./javascripts/util.js ***!
@@ -980,24 +861,19 @@ function () {
         return;
       }
 
-      console.log('changeSig', event);
       var row = event.target.dataset.idx;
       var rowAudioTags = document.getElementsByClassName("audioRow".concat(row));
 
       if (event.target.textContent === " ") {
         event.target.textContent = "#";
-        console.log('sharp-before', rowAudioTags[0].dataset.pianoidx);
 
         for (var i = 0; i < rowAudioTags.length; i++) {
           var pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
           rowAudioTags[i].setAttribute('src', _piano_filepaths_js__WEBPACK_IMPORTED_MODULE_0__["PIANO_PATHS"][pianoIdx + 1]);
           rowAudioTags[i].dataset.pianoidx = pianoIdx + 1;
         }
-
-        console.log("sharp-after", rowAudioTags[0].dataset.pianoidx);
       } else if (event.target.textContent === "#") {
         event.target.textContent = "b";
-        console.log("flat-before", rowAudioTags[0].dataset.pianoidx);
 
         for (var _i = 0; _i < rowAudioTags.length; _i++) {
           var _pianoIdx = parseInt(rowAudioTags[_i].dataset.pianoidx);
@@ -1008,11 +884,8 @@ function () {
             rowAudioTags[_i].dataset.pianoidx = _pianoIdx - 2;
           }
         }
-
-        console.log("flat-after", rowAudioTags[0].dataset.pianoidx);
       } else {
         event.target.textContent = " ";
-        console.log("nat-before", rowAudioTags[0].dataset.pianoidx);
 
         for (var _i2 = 0; _i2 < rowAudioTags.length; _i2++) {
           var _pianoIdx2 = parseInt(rowAudioTags[_i2].dataset.pianoidx);
@@ -1021,8 +894,6 @@ function () {
 
           rowAudioTags[_i2].dataset.pianoidx = _pianoIdx2 + 1;
         }
-
-        console.log("nat-after", rowAudioTags[0].dataset.pianoidx);
       }
     }
   }, {
@@ -1093,132 +964,6 @@ function () {
 
 /***/ }),
 
-/***/ "./javascripts/visualizer.js":
-/*!***********************************!*\
-  !*** ./javascripts/visualizer.js ***!
-  \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _circle_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./circle.js */ "./javascripts/circle.js");
-/* harmony import */ var _squares_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./squares.js */ "./javascripts/squares.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-var Visualizer =
-/*#__PURE__*/
-function () {
-  function Visualizer(ctx2) {
-    _classCallCheck(this, Visualizer);
-
-    this.ctx = ctx2;
-    this.circles = {};
-    this.squares = {};
-    this.type = 'square';
-  }
-
-  _createClass(Visualizer, [{
-    key: "addSquare",
-    value: function addSquare(x, y, width, color) {
-      var square = new _squares_js__WEBPACK_IMPORTED_MODULE_1__["default"](x, y, width, color);
-      this.squares[this.squares.length] = square;
-    }
-  }, {
-    key: "addCircle",
-    value: function addCircle(color, radius, idx, tempo) {
-      var circle = new _circle_js__WEBPACK_IMPORTED_MODULE_0__["default"](Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), radius, color, tempo);
-      this.circles[idx] = circle;
-    }
-  }, {
-    key: "deleteCircle",
-    value: function deleteCircle(idx) {
-      delete this.circles[idx];
-      console.log(this.circles);
-    }
-  }, {
-    key: "moveCircles",
-    value: function moveCircles() {
-      Object.values(this.circles).forEach(function (circle) {
-        circle.move();
-      });
-    }
-  }, {
-    key: "moveSquares",
-    value: function moveSquares() {
-      var _this = this;
-
-      Object.values(this.squares).forEach(function (square, idx) {
-        square.move();
-
-        if (square.y > 550 || square.x > 550) {
-          delete _this.squares[square];
-          console.log(_this.squares);
-        }
-      });
-    }
-  }, {
-    key: "start",
-    value: function start() {
-      var _this2 = this;
-
-      var animateCallback = function animateCallback() {
-        _this2.ctx.clearRect(0, 0, 500, 500);
-
-        if (_this2.type === 'square') {
-          _this2.renderSquares();
-        } else if (_this2.type === 'circle') {
-          _this2.renderCircles();
-        }
-
-        requestAnimationFrame(animateCallback);
-      };
-
-      animateCallback();
-    }
-  }, {
-    key: "renderCircles",
-    value: function renderCircles() {
-      var _this3 = this;
-
-      Object.values(this.circles).forEach(function (circle) {
-        circle.draw(_this3.ctx);
-      });
-      this.moveCircles();
-    }
-  }, {
-    key: "renderSquares",
-    value: function renderSquares() {
-      var _this4 = this;
-
-      Object.values(this.squares).forEach(function (square) {
-        square.draw(_this4.ctx);
-      });
-      this.moveSquares();
-    }
-  }, {
-    key: "changeSpeed",
-    value: function changeSpeed(newTempo) {
-      Object.values(this.circles).forEach(function (circle) {
-        circle.speed = newTempo / 100;
-      });
-    }
-  }]);
-
-  return Visualizer;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (Visualizer);
-
-/***/ }),
-
 /***/ "./sequence.js":
 /*!*********************!*\
   !*** ./sequence.js ***!
@@ -1229,9 +974,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./javascripts/sequencer.js */ "./javascripts/sequencer.js");
-/* harmony import */ var _javascripts_visualizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./javascripts/visualizer.js */ "./javascripts/visualizer.js");
-/* harmony import */ var _javascripts_util_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./javascripts/util.js */ "./javascripts/util.js");
-
+/* harmony import */ var _javascripts_util_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./javascripts/util.js */ "./javascripts/util.js");
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1247,7 +990,7 @@ document.addEventListener("DOMContentLoaded", function () {
   canvas.height = 500;
   var ctx = canvas.getContext("2d");
   var sequencer = new _javascripts_sequencer_js__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
-  var util = new _javascripts_util_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
+  var util = new _javascripts_util_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
   sequencer.draw(ctx);
   canvas.addEventListener('click', function (event) {
     return sequencer.toggleSquareAtPos(canvas, event);

@@ -81,7 +81,6 @@ class Sequencer {
   }
 
   changeStyle(style) {
-    console.log('IN SEQUENCER CHANGE STYLE', style);
     this.style = style;
   }
 
@@ -130,13 +129,19 @@ class Sequencer {
     let y = 0;
     let row = 0;
     for (let i = 0; i < 10; i++) {
+      const audio = document.createElement('audio');
+      audio.setAttribute('src', PIANO[4][row].filePath);
+      audio.setAttribute('id', row);
+      audio.setAttribute('type', 'audio/wav');
+      audio.setAttribute("class", `audioRow${row}`);
+      audio.setAttribute("data-pianoIdx", PIANO[4][row].idx);
+      document.body.appendChild(audio);
       for (let j = 0; j < 20; j++) {
         let newSquareIndex = this.squares.length;
         this.squares.push(new Square(
           x, 
           y, 
-          PIANO[4][row].filePath, 
-          PIANO[4][row].idx,
+          audio,
           newSquareIndex));
         x += 50;
       }
@@ -192,7 +197,6 @@ class Sequencer {
 
     const {x, y} = this.getCursorPos(canvas, event);
     const squareIdx = this.squareIndexAtPos(x, y);
-    console.log('idx', squareIdx);
     const square = this.squares[squareIdx];
 
     square.toggle();

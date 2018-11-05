@@ -59,13 +59,11 @@ class Util {
     if (typeof event.target.dataset.idx === 'undefined') {
       return;
     }
-    console.log('changeSig', event);
     const row = event.target.dataset.idx;
     const rowAudioTags = document.getElementsByClassName(`audioRow${row}`);
 
     if (event.target.textContent === " ") {
       event.target.textContent = "#";
-      console.log('sharp-before', rowAudioTags[0].dataset.pianoidx);
 
       for (let i = 0; i < rowAudioTags.length; i++) {
         const pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
@@ -73,13 +71,9 @@ class Util {
         rowAudioTags[i].dataset.pianoidx = pianoIdx + 1;
       }
 
-      console.log("sharp-after", rowAudioTags[0].dataset.pianoidx);
-
     } else if (event.target.textContent === "#") {
       event.target.textContent = "b";
       
-      console.log("flat-before", rowAudioTags[0].dataset.pianoidx);
-
       for (let i = 0; i < rowAudioTags.length; i++) {
         const pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
         if (pianoIdx > 1) {
@@ -87,21 +81,14 @@ class Util {
           rowAudioTags[i].dataset.pianoidx = pianoIdx - 2;
         }
       }
-      console.log("flat-after", rowAudioTags[0].dataset.pianoidx);
-
 
     } else {
       event.target.textContent = " ";
-
-      console.log("nat-before", rowAudioTags[0].dataset.pianoidx);
-
-
       for (let i = 0; i < rowAudioTags.length; i++) {
         const pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
         rowAudioTags[i].setAttribute("src", PIANO_PATHS[pianoIdx + 1]);
         rowAudioTags[i].dataset.pianoidx = pianoIdx + 1;
       }
-      console.log("nat-after", rowAudioTags[0].dataset.pianoidx);
 
     }
   }
