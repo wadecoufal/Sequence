@@ -12,15 +12,15 @@ const COLOR_SCHEMES = {
     'green': { value: 50, dir: "desc", changeVal: 4 },
     'blue': { value: 50, dir: "desc", changeVal: 4 }
   },
-  'Blue': {
+  'Aqua': {
     'red': { value: 0, dir: "desc", changeVal: 0 },
-    'green': { value: 0, dir: "asc", changeVal: 4 },
-    'blue': { value: 70, dir: "desc", changeVal: 4 }
+    'blue': { value: 0, dir: "desc", changeVal: 4 },
+    'green': { value: 70, dir: "asc", changeVal: 4 }
   }
 };
 
 class Sequencer {
-  constructor(ctx, visualizer) {
+  constructor(ctx) {
     this.squares = [];
     this.addSquares();
     this.ctx = ctx;
@@ -135,8 +135,8 @@ class Sequencer {
         this.squares.push(new Square(
           x, 
           y, 
-          PIANO[1][row].filePath, 
-          PIANO[1][row].idx,
+          PIANO[3][row].filePath, 
+          PIANO[3][row].idx,
           newSquareIndex));
         x += 50;
       }
@@ -192,6 +192,7 @@ class Sequencer {
 
     const {x, y} = this.getCursorPos(canvas, event);
     const squareIdx = this.squareIndexAtPos(x, y);
+    console.log('idx', squareIdx);
     const square = this.squares[squareIdx];
 
     square.toggle();

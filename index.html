@@ -9,21 +9,21 @@
   <body>
     <div class='sequencer-key-control'>
       <ul id="sharp-flats">
-        <li data-idx='0'> </li>
-        <li data-idx='1'> </li>
-        <li data-idx='2'> </li>
-        <li data-idx='3'> </li>
-        <li data-idx='4'> </li>
-        <li data-idx='5'> </li>
-        <li data-idx='6'> </li>
-        <li data-idx='7'> </li>
-        <li data-idx='8'> </li>
-        <li data-idx='9'> </li>
+        <li class="sharp-flat" data-idx='0'> </li>
+        <li class="sharp-flat" data-idx='1'> </li>
+        <li class="sharp-flat" data-idx='2'> </li>
+        <li class="sharp-flat" data-idx='3'> </li>
+        <li class="sharp-flat" data-idx='4'> </li>
+        <li class="sharp-flat" data-idx='5'> </li>
+        <li class="sharp-flat" data-idx='6'> </li>
+        <li class="sharp-flat" data-idx='7'> </li>
+        <li class="sharp-flat" data-idx='8'> </li>
+        <li class="sharp-flat" data-idx='9'> </li>
       </ul>
       
       
       <div class="mid-content">
-        <h1 class="sequence-header">Seequence</h1>
+        <h1 class="sequence-header">Sequence</h1>
         <canvas id="canvas"></canvas>
         <div class='music-controls'>
           <div class="bpm">
@@ -33,7 +33,7 @@
           </div>
           <div class="bpm" id="octaves">
             <p id='octave-minus'>-</p>
-            <div id="octave-display">2</div>
+            <div id="octave-display">3 8va</div>
             <p id='octave-plus'>+</p>
           </div>
         </div>
@@ -42,22 +42,36 @@
     </div>
     
 
-    <!-- <div class="options-two">
-      <ul id="styles" class="colors">
-        <li class="color-list-item">Square</li>
-        <li class="color-list-item">Circle</li>
-        <li class="color-list-item">Jewel</li>
-      </ul>
-
-      <ul id='octaves' class="colors">
-        <li class="color-list-item">1</li>
-        <li class="color-list-item">2</li>
-        <li class="color-list-item">3</li>
-        <li class="color-list-item">4</li>
-        <li class="color-list-item">5</li>
-        <li class="color-list-item">6</li>
-      </ul>
-    </div> -->
+    <div class="options">
+      <div>
+        <h2 class="header">Style</h2>
+        <ul id="styles" class="colors">
+          <li class="style-list-item selected">Square</li>
+          <li class="style-list-item">Circle</li>
+          <li class="style-list-item">Jewel</li>
+        </ul>
+      </div>
+      
+      <div>
+        <h2 class="header">Color</h2>
+        <ul id="colors" class="colors">
+          <li class="color-list-item selected">Colorful</li>
+          <li class="color-list-item">Muted</li>
+          <li class="color-list-item">Aqua</li>
+        </ul>
+      </div>
+      
+      <div>
+        <h2 class="header">Presets</h2>
+        <ul id="presets" class="colors">
+          <li class="preset-list-item">Preset 1</li>
+          <li class="preset-list-item">Preset 2</li>
+          <li class="preset-list-item">Preset 3</li>
+          <li class="preset-list-item">Clear</li>
+        </ul>
+      </div>
+      
+    </div>
   
     <script type="application/javascript" src="javascripts/bundle.js"></script>
   </body>

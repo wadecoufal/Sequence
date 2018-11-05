@@ -1,62 +1,42 @@
-// const INSTRUMENTS = {
-//   'Marimba': {
-//     6: "./assets/sound_files/marimba/mar_b3.wav",
-//     9: "./assets/sound_files/marimba/mar_c3.wav",
-//     8: "./assets/sound_files/marimba/mar_e3.wav",
-//     7: "./assets/sound_files/marimba/mar_g3.wav",
-//     3: "./assets/sound_files/marimba/mar_a4.wav",
-//     5: "./assets/sound_files/marimba/mar_d4.wav",
-//     4: "./assets/sound_files/marimba/mar_f4.wav",
-//     0: "./assets/sound_files/marimba/mar_b5.wav",
-//     2: "./assets/sound_files/marimba/mar_c5.wav",
-//     1: "./assets/sound_files/marimba/mar_e5.wav"
-//   },
-//   'Glockenspiel': {
-//     0: "./assets/sound_files/glock_d1.wav",
-//     1: "./assets/sound_files/glock_e1.wav",
-//     2: "./assets/sound_files/glock_f1.wav",
-//     3: "./assets/sound_files/glock_g1.wav",
-//     4: "./assets/sound_files/glock_a2.wav",
-//     5: "./assets/sound_files/glock_b2.wav",
-//     6: './assets/sound_files/glock_c2.wav',
-//     7: './assets/sound_files/glock_cs2.wav',
-//     8: './assets/sound_files/glock_d2.wav',
-//     9: './assets/sound_files/glock_e2.wav',
-//   }
-// }
-
-import { PIANO } from './piano_filepaths.js';
+import { PIANO, PIANO_PATHS } from './piano_filepaths.js';
 
 const PRESETS = {
   'Preset 1': {
-    bpm: 60,
-    instrument: 'Glockenspiel',
-    squareIndices: [0, 99],
-    colorScheme: 'Muted'
+    squareIndices: [0,40, 80, 120, 160, 141, 101, 61, 21, 42, 82, 122, 103, 
+      63, 84, 65, 105, 46, 86, 126, 147, 107, 67, 27, 8, 48, 88, 128, 168, 
+      149, 109, 69, 29, 50, 90, 130, 111, 71, 92, 73, 113, 54, 94, 134, 155, 
+      115, 75, 35, 16, 56, 96, 136, 176, 157, 117, 77, 37, 58, 98, 138, 119, 79]
   },
   'Preset 2': {
-    bpm: 120,
-    instrument: 'Marimba',
-    squareIndices: [1,2,3,4,5,6],
-    colorScheme: 'Blue'
+    squareIndices: [142, 144, 125, 25, 46, 67, 69, 91, 135, 96, 77]
   },
   'Preset 3': {
-    bpm: 180,
-    instrument: 'Glockenspiel',
-    squareIndices: [22, 33, 43, 77],
-    colorScheme: 'Colorful'
+    squareIndices: [160, 142, 84, 165, 46, 27, 148, 29, 50, 131, 152, 94, 115, 96, 157, 199]
+  },
+  'Clear': {
+    squareIndices: []
   }
 }
 
 class Util {
 
-  changeOctave (event) {
+  changeOctave (event, octave) {
     const allAudioTags = document.getElementsByTagName('audio');
     const octaveTag = document.getElementById('octave-display');
-
-    const newOctaveValue = (parseInt(octaveTag.textContent) + 1) % 6;
     
-    octaveTag.textContent = `${newOctaveValue}`;
+    let newOctaveValue;
+    if (typeof octave != 'undefined') {
+      newOctaveValue = octave;
+    } else if (event.target.id === 'octave-minus') {
+      newOctaveValue = (parseInt(octaveTag.textContent) - 1);
+      if (newOctaveValue === -1) {
+        newOctaveValue = 5;
+      }
+    } else if (event.target.id === 'octave-plus') {
+      newOctaveValue = (parseInt(octaveTag.textContent) + 1) % 6;
+    }
+    
+    octaveTag.textContent = `${newOctaveValue} 8va`;
 
     const octaveFilePaths = PIANO[newOctaveValue];
     let row = -1;
@@ -66,26 +46,69 @@ class Util {
         row += 1;
       }
       allAudioTags[idx].setAttribute("src", octaveFilePaths[row].filePath);
+      allAudioTags[idx].dataset.pianoidx = octaveFilePaths[row].idx;
+    }
+
+    const sharpFlatTags = document.getElementsByClassName('sharp-flat');
+    for (let idx = 0; idx < sharpFlatTags.length; idx++) {
+      sharpFlatTags[idx].textContent = " ";
     }
   }
 
   changeSignature(event) {
+    if (typeof event.target.dataset.idx === 'undefined') {
+      return;
+    }
     console.log('changeSig', event);
     const row = event.target.dataset.idx;
     const rowAudioTags = document.getElementsByClassName(`audioRow${row}`);
 
     if (event.target.textContent === " ") {
       event.target.textContent = "#";
+      console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) + 1)
+
+      for (let i = 0; i < rowAudioTags.length; i++) {
+        const pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
+        rowAudioTags[i].setAttribute('src', PIANO_PATHS[pianoIdx + 1]);
+        rowAudioTags[i].dataset.pianoidx = pianoIdx + 1;
+      }
 
     } else if (event.target.textContent === "#") {
       event.target.textContent = "b";
+      console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) - 2)
+
+      for (let i = 0; i < rowAudioTags.length; i++) {
+        const pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
+        if (pianoIdx > 1) {
+          rowAudioTags[i].setAttribute('src', PIANO_PATHS[pianoIdx - 2]);
+          rowAudioTags[i].dataset.pianoidx = pianoIdx - 2;
+        }
+      }
 
     } else {
       event.target.textContent = " ";
+      console.log('sharpedIdx', parseInt(rowAudioTags[0].dataset.pianoidx) + 1)
+
+
+      for (let i = 0; i < rowAudioTags.length; i++) {
+        const pianoIdx = parseInt(rowAudioTags[i].dataset.pianoidx);
+        rowAudioTags[i].setAttribute("src", PIANO_PATHS[pianoIdx + 1]);
+        rowAudioTags[i].dataset.pianoidx = pianoIdx + 1;
+      }
     }
   }
 
   changeColorScheme(event, sequencer, colorScheme) {
+    const colorListItems = document.getElementsByClassName('color-list-item');
+
+    for (let i = 0; i < colorListItems.length; i++) {
+      if (colorListItems[i] === event.target) {
+        event.target.classList.add('selected');
+      } else {
+        colorListItems[i].classList.remove('selected');
+      }
+    }
+
     let newColorScheme;
     if (colorScheme) {
       newColorScheme = colorScheme;
@@ -96,29 +119,37 @@ class Util {
   }
 
   setPreset(event, sequencer) {
+    const presetListItems = document.getElementsByClassName('preset-list-item');
+
+    for (let i = 0; i < presetListItems.length; i++) {
+      if (presetListItems[i] === event.target) {
+        event.target.classList.add('selected');
+      } else {
+        presetListItems[i].classList.remove('selected');
+      }
+    }
+
     const presetName = event.target.textContent;
     const preset = PRESETS[presetName];
     
-    this.changeColorScheme(null, sequencer, preset.colorScheme);
-    this.changeInstrument(null, preset.instrument);
-    const newTempo = Math.floor(60000 / preset.bpm);
-    sequencer.changeBpm(newTempo, preset.bpm);
     sequencer.untoggleAllSquares();
     preset.squareIndices.forEach( squareIdx => {
       sequencer.toggleSquareAtPos(null, null, squareIdx);
-    })
+    });
   }
 
   setStyle(event, sequencer) {
-    console.log('IN UTIL');
-    console.log('event', event.target.textContent);
+    const styleListItems = document.getElementsByClassName('style-list-item');
+
+    for (let i = 0; i < styleListItems.length; i++) {
+      if (styleListItems[i] === event.target) {
+        event.target.classList.add('selected');
+      } else {
+        styleListItems[i].classList.remove('selected');
+      }
+    }
     const style = event.target.textContent;
     sequencer.changeStyle(style);
-  }
-
-  createRandomPreset() {
-    // const preset;
-    // preset.instrument = Math.floor(Math.random() * INSTRUMENTS.length)
   }
 
 }

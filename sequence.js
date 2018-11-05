@@ -15,9 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const plus = document.getElementById('plus');
   const minus = document.getElementById('minus');
 
-  // const octaveMinus = document.getElementById('octave-minus');
-  // const octavePlus = document.getElementById('octave-plus');
-
   canvas.width = 1000;
   canvas.height = 500;
 
@@ -28,9 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
  
   canvas.addEventListener('click', (event) => sequencer.toggleSquareAtPos(canvas, event));
 
-  // colors.addEventListener('click', (event) => util.changeColorScheme(event, sequencer));
-  // presets.addEventListener('click', (event) => util.setPreset(event, sequencer));
-  // styles.addEventListener('click', (event) => util.setStyle(event, sequencer));
+  colors.addEventListener('click', (event) => util.changeColorScheme(event, sequencer));
+  presets.addEventListener('click', (event) => util.setPreset(event, sequencer));
+  styles.addEventListener('click', (event) => util.setStyle(event, sequencer));
   octaves.addEventListener('click', (event) => util.changeOctave(event));
 
   sharpFlats.addEventListener('click', (event) => util.changeSignature(event));
