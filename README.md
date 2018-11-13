@@ -2,7 +2,7 @@
 
 ## Overview
 
-Sequence is a simple way to create music.
+Sequence is a simple way to create music. Check it out [here](https://wadecoufal.github.io/Sequence)!
 
 The sequencer is a grid of squares, each of which represent a note. The sequencer passes from left to right on the grid, and any square that is toggled on will sound. When the sequencer reaches the end of the grid, it loops back to the beginning. It's a great way to improvise, as the squares can be toggled in real time.
 
